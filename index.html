@@ -1,276 +1,196 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
+<html lang="zh-CN" data-theme="light">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="这里是 MewBaka 笨猫 官方网站！点击即可进入(ฅ´ω`ฅ)" />
-    <meta name="keywords" content="MewBaka,笨猫" />
-    <meta name="robots" content="all" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MewBaka 笨猫</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <link rel="stylesheet" href="https://pugui.alicdn.com/t/font_4111361_9v7n6v0v6.css">
-
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: "AlibabaPuHuiTi-3-55-Regular", "PingFang SC", "Microsoft YaHei", sans-serif;
-            color: #333;
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        h1,
-        h2,
-        h3,
-        .font-bold {
-            font-family: "AlibabaPuHuiTi-3-85-Bold", sans-serif;
-        }
-
-        section {
-            scroll-margin-top: 80px;
-        }
-
-        .glass-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .glass-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
-            border-color: rgba(0, 149, 255, 0.3);
-        }
-
-        .btn-primary {
-            background: linear-gradient(to right, #007bff, #00c6ff);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(to right, #0056b3, #0088cc);
-            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background-color: #f0f2f5;
-            color: #555;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-
-        .btn-secondary:hover {
-            background-color: #e0e2e5;
-            color: #333;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-            transform: translateY(-1px);
-        }
-
-        .icon-bg-gradient {
-            background: linear-gradient(to right top, #e0f2fe, #bbdefb);
-            transition: all 0.3s ease;
-        }
-
-        .glass-card:hover .icon-bg-gradient {
-            background: linear-gradient(to right top, #a7d9ff, #7ac0f8);
-        }
-
-        #page-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f8fafd;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out;
-        }
-
-        .loader-spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #0095ff;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .hidden-loader {
-            opacity: 0;
-            visibility: hidden;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MewBaka 笨猫</title>
+  <meta name="description" content="MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者，致力于创造有趣的视觉小说体验。" />
+  <meta name="keywords" content="MewBaka,笨猫,视觉小说,NarraLeaf,Visual Novel,游戏引擎,独立游戏" />
+  <meta name="author" content="MewBaka" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#40A8C4" />
+  <link rel="canonical" href="https://mewbaka.cn/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="MewBaka 笨猫" />
+  <meta property="og:description" content="MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者。" />
+  <meta property="og:url" content="https://mewbaka.cn/" />
+  <meta property="og:site_name" content="MewBaka 笨猫" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="MewBaka 笨猫" />
+  <meta name="twitter:description" content="MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者。" />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preload" href="assets/images/logo/dark.webp" as="image" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.cdnfonts.com/css/harmonyos-sans" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MewBaka 笨猫",
+    "url": "https://mewbaka.cn",
+    "logo": "https://mewbaka.cn/assets/images/logo/light.webp",
+    "description": "视觉小说游戏引擎 NarraLeaf Project 开发者",
+    "sameAs": [
+      "https://github.com/mewbaka",
+      "https://github.com/narraleaf",
+      "https://space.bilibili.com/3546731419535895",
+      "https://afdian.com/a/MewBaka"
+    ]
+  }
+  </script>
 </head>
+<body>
+<a href="#main" class="skip-link">跳转到内容</a>
 
-<body class="bg-gray-50">
-
-    <div id="page-loader">
-        <div class="loader-spinner"></div>
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">
+      <img class="logo-img light-logo" src="assets/images/logo/dark.webp" alt="MewBaka Logo" />
+      <img class="logo-img dark-logo" src="assets/images/logo/light.webp" alt="MewBaka Logo" />
+    </a>
+    <div class="header-right">
+      <div class="nav-links" id="navLinks">
+        <a href="#hero" class="active">主页</a>
+        <a href="#narraleaf">NarraLeaf</a>
+        <a href="#contact">联系我们</a>
+        <a href="https://blog.mewbaka.cn" target="_blank" rel="noopener noreferrer">博客</a>
+        <div class="nav-actions">
+          <a href="https://github.com/mewbaka" target="_blank" rel="noopener noreferrer" class="nav-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+          </button>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="菜单">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </div>
+</header>
 
-    <nav class="flex justify-between items-center px-8 py-4 bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-md">
-        <div class="logo">
-            <img src="assets/images/logo/dark.png" alt="MewBaka Logo" class="h-7 w-auto">
+<main id="main">
+
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <h1 class="doodle">简单又笨蛋的<br/>视觉小说工作室</h1>
+        <div class="doodle-deco">
+          <span class="deco-zigzag"></span>
         </div>
-        <div class="space-x-8 text-base font-medium text-gray-700">
-            <a href="#about" class="hover:text-blue-600 transition duration-300 ease-in-out">关于我们</a>
-            <a href="#projects" class="hover:text-blue-600 transition duration-300 ease-in-out">项目作品</a>
-            <a href="#contact" class="hover:text-blue-600 transition duration-300 ease-in-out">联系我们</a>
-            <a href="https://github.com/mewbaka" target="_blank"
-                class="hover:text-blue-600 transition duration-300 ease-in-out"><i
-                    class="fab fa-github mr-1"></i>GitHub</a>
-        </div>
-    </nav>
+        <p>欢迎来到 MewBaka 笨猫 工作室的官方网站<br/>简单来讲，我们是一个什么都想做的工作室<br/>总要相信，笨蛋也能改变世界</p>
+      </div>
+      <div class="hero-image">
+        <div class="hero-blob-blue"></div>
+        <div class="hero-blob-beige"></div>
+        <img src="assets/images/banner.webp" alt="MewBaka 工作室" />
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="py-28 text-center px-4 bg-gradient-to-br from-gray-50 to-blue-50">
-        <p class="text-gray-500 text-lg mb-2 tracking-wide">这是一个</p>
-        <h1 class="text-6xl md:text-7xl mb-6 tracking-tight text-gray-1000">简单又笨蛋的<br>视觉小说工作室</h1>
-        <p class="text-gray-600 leading-relaxed max-w-3xl mx-auto text-lg">
-            欢迎来到 MewBaka (笨猫) 工作室的官方网站<br>
-            简单来讲，我们是一个什么都想做的工作室<br>
-            总要相信，笨蛋也能改变世界
-        </p>
-    </section>
+<section class="narraleaf" id="narraleaf">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-header-text">
+        <h2>NarraLeaf Project</h2>
+        <p>NarraLeaf Project 是一款现代视觉小说（Visual Novel）游戏引擎，提供多种解决方案<br/>从灵活集成到一体化开发，帮助释放你的创造力</p>
+      </div>
+      <img src="assets/images/narraleaf/logo.webp" alt="NarraLeaf Logo" class="narraleaf-logo" />
+    </div>
+    <div class="btn-group">
+      <a href="https://github.com/narraleaf" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><i class="fab fa-github"></i> 前往 GitHub 组织</a>
+      <a href="https://narraleaf.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">前往官方网站</a>
+    </div>
+    <div class="narraleaf-grid">
+      <div class="img-large">
+        <img src="assets/images/narraleaf/img1.webp" alt="NarraLeaf 角色" loading="lazy" />
+      </div>
+      <div class="img-small">
+        <img src="assets/images/narraleaf/img2.webp" alt="NarraLeaf 编辑器" loading="lazy" />
+      </div>
+      <div class="img-small">
+        <img src="assets/images/narraleaf/img3.webp" alt="NarraLeaf Studio" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="about" class="py-24 bg-white text-center px-4 shadow-inner">
-        <h2 class="text-4xl text-gray-800 mb-10">关于我们</h2>
-        <div class="max-w-4xl mx-auto text-gray-700 leading-9 text-lg space-y-4">
-            <p>我们成立于2025年中旬，原名为 <span class="text-blue-600 font-bold">StarBit星点科技</span>，是一个为爱发电的小型视觉小说工作室</p>
-            <p>我们主要制作以 Girls Love (GL) 为核心的视觉小说游戏，同时也正致力于为中小型团队提供更优的视觉小说解决方案</p>
-            <p>我们希望为玩家提供更好的游戏体验，不追求浮华的特效，只追求能留在所有人底的那句台词</p>
-        </div>
-    </section>
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-title">
+      <h2>联系我们</h2>
+      <p>通过以下渠道即可联系我们</p>
+    </div>
+    <div class="cards-grid">
+      <a href="https://qm.qq.com/q/kIqDMi6DTy" target="_blank" rel="noopener noreferrer" class="card">
+        <div class="card-icon qq"><i class="fab fa-qq"></i></div>
+        <h3>QQ 交流群</h3>
+        <div class="card-sub">总群</div>
+        <div class="card-detail">975654745</div>
+      </a>
+      <a href="mailto:team@mewbaka.cn" class="card">
+        <div class="card-icon email"><i class="fas fa-envelope"></i></div>
+        <h3>邮箱</h3>
+        <div class="card-sub">官方邮箱</div>
+        <div class="card-detail">team@mewbaka.cn</div>
+      </a>
+      <a href="mailto:join@mewbaka.cn" class="card">
+        <div class="card-icon recruit"><i class="fas fa-user-plus"></i></div>
+        <h3>邮箱</h3>
+        <div class="card-sub">招募联系邮箱</div>
+        <div class="card-detail">join@mewbaka.cn</div>
+      </a>
+    </div>
+  </div>
+</section>
 
-    <section id="projects" class="py-24 px-4 bg-gradient-to-br from-blue-50 to-white">
-        <h2 class="text-4xl text-gray-800 text-center mb-14">旗下项目与作品</h2>
-        <div class="max-w-sm mx-auto bg-white rounded-3xl overflow-hidden border border-gray-100 p-8 glass-card">
-            <div
-                class="bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl h-52 mb-6 flex items-center justify-center overflow-hidden">
-                <img src="assets/images/NarraLeaf.png" alt="NarraLeaf Engine" class="w-full h-full object-cover">
-            </div>
-            <h3 class="text-2xl text-gray-800 mb-2">NarraLeaf Engine <span
-                    class="text-base font-normal text-gray-500">言叶引擎</span></h3>
-            <p class="text-gray-600 text-base mb-8">使用轻量级、可定制且易于使用的视觉小说游戏框架制作你的视觉小说游戏！</p>
-            <div class="space-y-4">
-                <a href="https://github.com/mewbaka" target="_blank"
-                    class="w-full py-4 text-white rounded-full font-bold btn-primary flex justify-center items-center">
-                    <i class="fab fa-github mr-2"></i> 点击前往 GitHub
-                </a>
-                <div class="w-full py-4 rounded-full text-center btn-secondary">
-                    <a href="https://react.narraLeaf.com/" target="_blank"> 官方网站 </a>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="social" id="social">
+  <div class="container">
+    <div class="section-title">
+      <h2>社交渠道</h2>
+      <p>工作室在部分网站开设的账号</p>
+    </div>
+    <div class="cards-grid">
+      <a href="https://github.com/mewbaka" target="_blank" rel="noopener noreferrer" class="card">
+        <div class="card-icon github"><i class="fab fa-github"></i></div>
+        <h3>点击前往</h3>
+        <div class="card-sub">GitHub</div>
+        <div class="card-detail">https://github.com/mewbaka</div>
+      </a>
+      <a href="https://space.bilibili.com/3546731419535895" target="_blank" rel="noopener noreferrer" class="card">
+        <div class="card-icon bilibili"><i class="fab fa-bilibili"></i></div>
+        <h3>点击前往</h3>
+        <div class="card-sub">BiliBili</div>
+        <div class="card-detail">UID3546731419535895</div>
+      </a>
+      <a href="https://afdian.com/a/MewBaka" target="_blank" rel="noopener noreferrer" class="card">
+        <div class="card-icon afdian"><i class="fas fa-bolt"></i></div>
+        <h3>点击前往</h3>
+        <div class="card-sub">爱发电</div>
+        <div class="card-detail">https://afdian.com/a/MewBaka</div>
+      </a>
+    </div>
+  </div>
+</section>
 
-    <section id="contact" class="py-24 px-4 max-w-6xl mx-auto">
-        <h2 class="text-4xl text-gray-800 text-center mb-14">联系我们</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<button class="back-to-top" id="backToTop" aria-label="回到顶部"><i class="fas fa-arrow-up"></i></button>
 
-            <a href="mailto:team@mewbaka.cn"
-                class="bg-white p-7 rounded-2xl flex items-center shadow-sm border border-gray-100 glass-card">
-                <div class="w-14 h-14 rounded-xl flex items-center justify-center mr-5 icon-bg-gradient">
-                    <i class="fas fa-envelope text-blue-600 text-xl"></i>
-                </div>
-                <div>
-                    <p class="text-lg font-bold text-gray-800">官方邮箱</p>
-                    <p class="text-sm text-gray-500">team@mewbaka.cn</p>
-                </div>
-            </a>
+</main>
 
-            <a href="mailto:join@mewbaka.cn"
-                class="bg-white p-7 rounded-2xl flex items-center shadow-sm border border-gray-100 glass-card">
-                <div class="w-14 h-14 rounded-xl flex items-center justify-center mr-5 icon-bg-gradient">
-                    <i class="fas fa-user-plus text-blue-600 text-xl"></i>
-                </div>
-                <div>
-                    <p class="text-lg font-bold text-gray-800">招募联系邮箱</p>
-                    <p class="text-sm text-gray-500">join@mewbaka.cn</p>
-                </div>
-            </a>
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-logo">
+      <img class="light-logo" src="assets/images/logo/dark.webp" alt="MewBaka Logo" />
+      <img class="dark-logo" src="assets/images/logo/light.webp" alt="MewBaka Logo" />
+    </div>
+    <div class="footer-copy">&copy; 2026 笨猫工作室 MewBaka Studio. All Rights Reserved.</div>
+  </div>
+</footer>
 
-            <a href="https://space.bilibili.com/3546731419535895" target="_blank"
-                class="bg-white p-7 rounded-2xl flex items-center shadow-sm border border-gray-100 glass-card">
-                <div class="w-14 h-14 rounded-xl flex items-center justify-center mr-5 icon-bg-gradient">
-                    <i class="fab fa-bilibili text-blue-600 text-xl"></i>
-                </div>
-                <div>
-                    <p class="text-lg font-bold text-gray-800">BiliBili</p>
-                    <p class="text-sm text-gray-500">MewBaka</p>
-                </div>
-            </a>
-
-            <a href="https://github.com/mewbaka" target="_blank"
-                class="bg-white p-7 rounded-2xl flex items-center shadow-sm border border-gray-100 glass-card">
-                <div class="w-14 h-14 rounded-xl flex items-center justify-center mr-5 icon-bg-gradient">
-                    <i class="fab fa-github text-blue-600 text-xl"></i>
-                </div>
-                <div>
-                    <p class="text-lg font-bold text-gray-800">GitHub</p>
-                    <p class="text-sm text-gray-500 truncate w-36">github.com/mewbaka</p>
-                </div>
-            </a>
-
-            <a href="https://qm.qq.com/q/kIqDMi6DTy" target="_blank"
-                class="bg-white p-7 rounded-2xl flex items-center shadow-sm border border-gray-100 glass-card">
-                <div class="w-14 h-14 rounded-xl flex items-center justify-center mr-5 icon-bg-gradient">
-                    <i class="fas fa-comment-dots text-blue-600 text-xl"></i>
-                </div>
-                <div>
-                    <p class="text-lg font-bold text-gray-800">QQ交流群（总群）</p>
-                    <p class="text-sm text-gray-500">975654745</p>
-                </div>
-            </a>
-
-            <a href="https://afdian.com/a/MewBaka" target="_blank"
-                class="bg-white p-7 rounded-2xl flex items-center shadow-sm border border-gray-100 glass-card">
-                <div class="w-14 h-14 rounded-xl flex items-center justify-center mr-5 icon-bg-gradient">
-                    <i class="fas fa-bolt text-blue-600 text-xl"></i>
-                </div>
-                <div>
-                    <p class="text-lg font-bold text-gray-800">爱发电</p>
-                    <p class="text-sm text-gray-500 truncate w-50">afdian.com/a/MewBaka</p>
-                </div>
-            </a>
-
-        </div>
-    </section>
-
-    <footer class="py-12 border-t border-gray-100 text-center text-base text-gray-400">
-        © 2026 笨猫工作室 MewBaka Studio. All Rights Reserved.
-    </footer>
-
-    <script>
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('page-loader');
-            loader.classList.add('hidden-loader');
-            setTimeout(() => {
-                loader.style.display = 'none';
-            }, 500);
-        });
-    </script>
-
+<script src="assets/js/main.js"></script>
 </body>
-
 </html>
