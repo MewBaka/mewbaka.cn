@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MewBaka 笨猫</title>
-  <meta name="description" content="MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者，致力于创造有趣的视觉小说体验。" />
+  <meta name="description" content="MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者，致力于创造有趣的视觉小说体验" />
   <meta name="keywords" content="MewBaka,笨猫,视觉小说,NarraLeaf,Visual Novel,游戏引擎,独立游戏" />
   <meta name="author" content="MewBaka" />
   <meta name="robots" content="index, follow" />
@@ -12,13 +12,13 @@
   <link rel="canonical" href="https://mewbaka.cn/" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="MewBaka 笨猫" />
-  <meta property="og:description" content="MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者。" />
+  <meta property="og:description" content="MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者" />
   <meta property="og:url" content="https://mewbaka.cn/" />
   <meta property="og:site_name" content="MewBaka 笨猫" />
   <meta property="og:locale" content="zh_CN" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="MewBaka 笨猫" />
-  <meta name="twitter:description" content="MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者。" />
+  <meta name="twitter:description" content="MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者" />
   <link rel="icon" href="favicon.ico" />
   <link rel="preload" href="assets/images/logo/dark.webp" as="image" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -86,7 +86,7 @@
       <div class="hero-image">
         <div class="hero-blob-blue"></div>
         <div class="hero-blob-beige"></div>
-        <img src="assets/images/banner.webp" alt="MewBaka 工作室" />
+        <img src="assets/images/banner.webp" alt="MewBaka 工作室" fetchpriority="high" />
       </div>
     </div>
   </div>
@@ -97,7 +97,7 @@
     <div class="section-header">
       <div class="section-header-text">
         <h2>NarraLeaf Project</h2>
-        <p>NarraLeaf Project 是一款现代视觉小说（Visual Novel）游戏引擎，提供多种解决方案<br/>从灵活集成到一体化开发，帮助释放你的创造力</p>
+        <p>MewBaka 工作室旗下视觉小说引擎产品<br>NarraLeaf Project 是一款现代视觉小说（Visual Novel）游戏引擎，提供多种解决方案<br/>从灵活集成到一体化开发，帮助释放你的创造力</p>
       </div>
       <img src="assets/images/narraleaf/logo.webp" alt="NarraLeaf Logo" class="narraleaf-logo" />
     </div>
@@ -123,6 +123,7 @@
   <div class="container">
     <div class="blog-grid">
       <div class="blog-text">
+        <h2>MewBaka Blog</h2>
         <p class="blog-desc">查看最新动态，了解 MewBaka 的事情<br/>欢迎访问 MewBaka Blog 查看更多</p>
         <a href="https://blog.mewbaka.cn" target="_blank" rel="noopener noreferrer" class="btn btn-primary blog-btn">前往 Blog</a>
       </div>
@@ -137,7 +138,8 @@
   <div class="container">
     <div class="cs-grid">
       <div class="cs-column">
-        <h2 class="cs-title">通过以下渠道即可联系我们</h2>
+        <h2 class="cs-heading">联系我们</h2>
+        <p class="cs-sub">通过以下渠道即可联系我们</p>
         <a href="https://qm.qq.com/q/kIqDMi6DTy" target="_blank" rel="noopener noreferrer" class="cs-card">
           <div class="cs-icon qq"><i class="fab fa-qq"></i></div>
           <div class="cs-info">
@@ -161,7 +163,8 @@
         </a>
       </div>
       <div class="cs-column">
-        <h2 class="cs-title">工作室在部分网站开设的账号</h2>
+        <h2 class="cs-heading">外部链接</h2>
+        <p class="cs-sub">工作室在部分网站开设的账号</p>
         <a href="https://github.com/mewbaka" target="_blank" rel="noopener noreferrer" class="cs-card">
           <div class="cs-icon github"><i class="fab fa-github"></i></div>
           <div class="cs-info">
@@ -183,8 +186,15 @@
             <span class="cs-detail">MewBaka</span>
           </div>
         </a>
-        <div class="cs-card wechat-card">
-          <img src="assets/images/wechat.webp" alt="微信搜一搜 MewBaka笨猫" class="wechat-img" loading="lazy" />
+        <div class="cs-card wechat-card" id="wechatCard">
+          <div class="cs-icon wechat"><i class="fab fa-weixin"></i></div>
+          <div class="cs-info">
+            <span class="cs-name">微信公众号</span>
+            <span class="cs-detail">扫码关注</span>
+          </div>
+          <div class="wechat-popup" id="wechatPopup">
+            <img src="assets/images/wechat.webp" alt="微信搜一搜 MewBaka笨猫" loading="lazy" />
+          </div>
         </div>
       </div>
     </div>

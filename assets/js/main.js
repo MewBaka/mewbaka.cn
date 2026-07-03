@@ -89,4 +89,17 @@ document.addEventListener('DOMContentLoaded', function () {
   backToTop.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+
+  var wechatCard = document.getElementById('wechatCard');
+  if (wechatCard) {
+    wechatCard.addEventListener('click', function (e) {
+      e.preventDefault();
+      this.classList.toggle('popup-open');
+    });
+    document.addEventListener('click', function (e) {
+      if (!wechatCard.contains(e.target)) {
+        wechatCard.classList.remove('popup-open');
+      }
+    });
+  }
 });
