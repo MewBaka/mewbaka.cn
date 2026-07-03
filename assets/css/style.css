@@ -91,25 +91,35 @@ header{position:sticky;top:0;z-index:100;background:var(--header-bg);backdrop-fi
 .narraleaf-grid .img-small img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
 .narraleaf-grid .img-small:hover img{transform:scale(1.05)}
 
-/* ===== CONTACT & SOCIAL SECTIONS ===== */
-.section-title{text-align:center;padding:60px 0 12px}
-.section-title h2{font-size:1.8rem;font-weight:900;margin-bottom:8px}
-.section-title p{color:var(--text-secondary);font-size:.9rem}
+/* ===== BLOG SECTION ===== */
+.blog{padding:60px 0}
+.blog-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.blog-text{padding-right:40px}
+.blog-desc{color:var(--text-secondary);font-size:1rem;line-height:1.8;margin-bottom:24px}
+.blog-btn{padding:14px 36px;font-size:1rem;border-radius:12px}
+.blog-image img{width:100%;border-radius:var(--radius-lg)}
 
-.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:24px 0 60px}
-.card{background:var(--card-bg);border-radius:var(--radius-lg);padding:32px 20px;text-align:center;transition:transform .2s,box-shadow .2s;cursor:pointer;display:block}
-.card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
-.card-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.6rem;transition:transform .3s ease}
-.card:hover .card-icon{transform:scale(1.1) rotate(-5deg)}
-.card-icon.qq{background:#e3f2fd;color:#1976d2}
-.card-icon.email{background:#e8f5e9;color:#4caf50}
-.card-icon.recruit{background:#fff3e0;color:#ff9800}
-.card-icon.github{background:#f3e8ff;color:#9333ea}
-.card-icon.bilibili{background:#fce4ec;color:#e91e63}
-.card-icon.afdian{background:#fff8e1;color:#f59e0b}
-.card h3{font-size:1rem;font-weight:900;margin-bottom:4px}
-.card .card-sub{font-size:.85rem;color:var(--text-secondary);margin-bottom:4px}
-.card .card-detail{font-size:.8rem;color:#999}
+/* ===== CONTACT & SOCIAL SECTION ===== */
+.contact-social{padding:40px 0 80px}
+.cs-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.cs-column{display:flex;flex-direction:column;gap:16px}
+.cs-title{font-size:1rem;font-weight:500;color:var(--text-secondary);margin-bottom:4px}
+.cs-card{display:flex;align-items:center;gap:20px;background:var(--card-bg);border-radius:var(--radius-lg);padding:20px 24px;transition:transform .2s,box-shadow .2s;cursor:pointer}
+.cs-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.06)}
+.cs-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;transition:transform .3s ease}
+.cs-card:hover .cs-icon{transform:scale(1.1) rotate(-5deg)}
+.cs-icon.qq{background:#e3f2fd;color:#1976d2}
+.cs-icon.email{background:#e8f5e9;color:#4caf50}
+.cs-icon.recruit{background:#fff3e0;color:#ff9800}
+.cs-icon.github{background:#f3e8ff;color:#9333ea}
+.cs-icon.bilibili{background:#fce4ec;color:#e91e63}
+.cs-icon.afdian{background:#fff8e1;color:#f59e0b}
+.cs-info{display:flex;align-items:center;justify-content:space-between;flex:1;min-width:0}
+.cs-name{font-size:1rem;font-weight:700;white-space:nowrap}
+.cs-detail{font-size:.85rem;color:var(--text-secondary);white-space:nowrap}
+.wechat-card{padding:0;overflow:hidden;cursor:default;background:#07c160}
+.wechat-card:hover{transform:none;box-shadow:none}
+.wechat-img{width:100%;display:block}
 
 /* ===== FOOTER ===== */
 footer{border-top:1px solid var(--border);padding:24px 0}
@@ -141,7 +151,11 @@ footer{border-top:1px solid var(--border);padding:24px 0}
   .narraleaf-logo{order:-1;align-self:flex-start}
   .narraleaf-grid{grid-template-columns:1fr}
   .narraleaf-grid .img-large{grid-row:auto}
-  .cards-grid{grid-template-columns:1fr}
+  .blog-grid{grid-template-columns:1fr}
+  .blog-text{padding-right:0;text-align:center}
+  .blog-btn{margin:0 auto}
+  .blog-image{order:-1}
+  .cs-grid{grid-template-columns:1fr}
   .header-inner{height:56px}
   .logo img{height:28px}
   .hamburger{display:flex}
@@ -161,8 +175,8 @@ footer{border-top:1px solid var(--border);padding:24px 0}
   .hero-text h1{font-size:1.6rem}
   .header-inner{padding:0 12px}
   .container{padding:0 12px}
-  .cards-grid{gap:12px}
-  .card{padding:24px 16px}
+  .cs-card{padding:16px}
+  .cs-icon{width:44px;height:44px;font-size:1.3rem}
 }
 
 /* ===== THEME TRANSITION ===== */
