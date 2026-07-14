@@ -10,11 +10,15 @@
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#40A8C4" />
   <link rel="canonical" href="https://mewbaka.cn/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://mewbaka.cn/" />
+  <link rel="alternate" hreflang="en" href="https://mewbaka.cn/en/" />
+  <link rel="alternate" hreflang="ja" href="https://mewbaka.cn/ja/" />
+  <link rel="alternate" hreflang="x-default" href="https://mewbaka.cn/" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="MewBaka 笨猫" />
   <meta property="og:description" content="MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者" />
   <meta property="og:url" content="https://mewbaka.cn/" />
-  <meta property="og:site_name" content="MewBaka 笨猫" />
+  <meta property="og:site_name" content="MewBaka" />
   <meta property="og:locale" content="zh_CN" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="MewBaka 笨猫" />
@@ -24,7 +28,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link href="https://fonts.cdnfonts.com/css/harmonyos-sans" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
-  <script type="application/ld+json">
+  <script type="application/ld+json" id="ldJson">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -42,7 +46,7 @@
   </script>
 </head>
 <body>
-<a href="#main" class="skip-link">跳转到内容</a>
+<a href="#main" class="skip-link" data-i18n="skipLink">跳转到内容</a>
 
 <header>
   <div class="container header-inner">
@@ -52,19 +56,27 @@
     </a>
     <div class="header-right">
       <div class="nav-links" id="navLinks">
-        <a href="#hero" class="active">主页</a>
-        <a href="#narraleaf">NarraLeaf</a>
-        <a href="#contact">联系我们</a>
-        <a href="https://blog.mewbaka.cn" target="_blank" rel="noopener noreferrer">博客</a>
+        <a href="#hero" class="active" data-i18n="navHome">主页</a>
+        <a href="#narraleaf" data-i18n="navNarraLeaf">NarraLeaf</a>
+        <a href="#contact" data-i18n="navContact">联系我们</a>
+        <a href="https://blog.mewbaka.cn" target="_blank" rel="noopener noreferrer" data-i18n="navBlog">博客</a>
         <div class="nav-actions">
+          <div class="lang-wrapper">
+            <button class="lang-toggle" id="langToggle" data-i18n-aria="langLabel" aria-label="切换语言"><i class="fas fa-language"></i></button>
+            <div class="lang-dropdown" id="langDropdown">
+              <button data-lang="zh-CN" class="lang-option active">中文</button>
+              <button data-lang="en" class="lang-option">English</button>
+              <button data-lang="ja" class="lang-option">日本語</button>
+            </div>
+          </div>
           <a href="https://github.com/mewbaka" target="_blank" rel="noopener noreferrer" class="nav-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+          <button class="theme-toggle" id="themeToggle" data-i18n-aria="themeLabel" aria-label="切换主题">
             <i class="fas fa-moon"></i>
             <i class="fas fa-sun"></i>
           </button>
         </div>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="菜单">
+      <button class="hamburger" id="hamburger" data-i18n-aria="menuLabel" aria-label="菜单">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -77,11 +89,11 @@
   <div class="container">
     <div class="hero-grid">
       <div class="hero-text">
-        <h1 class="doodle">简单又笨蛋的<br/>视觉小说工作室</h1>
+        <h1 class="doodle" data-i18n="heroTitle">简单又笨蛋的<br/>视觉小说工作室</h1>
         <div class="doodle-deco">
           <span class="deco-zigzag"></span>
         </div>
-        <p>欢迎来到 MewBaka 笨猫 工作室的官方网站<br/>简单来讲，我们是一个什么都想做的工作室<br/>总要相信，笨蛋也能改变世界</p>
+        <p data-i18n="heroDesc">欢迎来到 MewBaka 笨猫 工作室的官方网站<br/>简单来讲，我们是一个什么都想做的工作室<br/>总要相信，笨蛋也能改变世界</p>
       </div>
       <div class="hero-image">
         <div class="hero-blob-blue"></div>
@@ -97,13 +109,13 @@
     <div class="section-header">
       <div class="section-header-text">
         <h2>NarraLeaf Project</h2>
-        <p>MewBaka 工作室旗下视觉小说引擎产品<br>NarraLeaf Project 是一款现代视觉小说（Visual Novel）游戏引擎，提供多种解决方案<br/>从灵活集成到一体化开发，帮助释放你的创造力</p>
+        <p data-i18n="narraleafDesc">MewBaka 工作室旗下视觉小说引擎产品<br>NarraLeaf Project 是一款现代视觉小说（Visual Novel）游戏引擎，提供多种解决方案<br/>从灵活集成到一体化开发，帮助释放你的创造力</p>
       </div>
       <img src="assets/images/narraleaf/logo.webp" alt="NarraLeaf Logo" class="narraleaf-logo" />
     </div>
     <div class="btn-group">
-      <a href="https://github.com/narraleaf" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><i class="fab fa-github"></i> 前往 GitHub 组织</a>
-      <a href="https://narraleaf.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">前往官方网站</a>
+      <a href="https://github.com/narraleaf" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-i18n="narraleafGitBtn"><i class="fab fa-github"></i> 前往 GitHub 组织</a>
+      <a href="https://narraleaf.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline" data-i18n="narraleafSiteBtn">前往官方网站</a>
     </div>
     <div class="narraleaf-grid">
       <div class="img-large">
@@ -124,8 +136,8 @@
     <div class="blog-grid">
       <div class="blog-text">
         <h2>MewBaka Blog</h2>
-        <p class="blog-desc">查看最新动态，了解 MewBaka 的事情<br/>欢迎访问 MewBaka Blog 查看更多</p>
-        <a href="https://blog.mewbaka.cn" target="_blank" rel="noopener noreferrer" class="btn btn-primary blog-btn">前往 Blog</a>
+        <p class="blog-desc" data-i18n="blogDesc">查看最新动态，了解 MewBaka 的事情<br/>欢迎访问 MewBaka Blog 查看更多</p>
+        <a href="https://blog.mewbaka.cn" target="_blank" rel="noopener noreferrer" class="btn btn-primary blog-btn" data-i18n="blogBtn">前往 Blog</a>
       </div>
       <div class="blog-image">
         <img src="assets/images/blog.svg" alt="MewBaka Blog" loading="lazy" />
@@ -138,59 +150,59 @@
   <div class="container">
     <div class="cs-grid">
       <div class="cs-column">
-        <h2 class="cs-heading">联系我们</h2>
-        <p class="cs-sub">通过以下渠道即可联系我们</p>
+        <h2 class="cs-heading" data-i18n="contactTitle">联系我们</h2>
+        <p class="cs-sub" data-i18n="contactSub">通过以下渠道即可联系我们</p>
         <a href="https://qm.qq.com/q/kIqDMi6DTy" target="_blank" rel="noopener noreferrer" class="cs-card">
           <div class="cs-icon qq"><i class="fab fa-qq"></i></div>
           <div class="cs-info">
-            <span class="cs-name">QQ 交流总群</span>
+            <span class="cs-name" data-i18n="qqName">QQ 交流总群</span>
             <span class="cs-detail">975654745</span>
           </div>
         </a>
         <a href="mailto:team@mewbaka.cn" class="cs-card">
           <div class="cs-icon email"><i class="fas fa-envelope"></i></div>
           <div class="cs-info">
-            <span class="cs-name">官方邮箱</span>
+            <span class="cs-name" data-i18n="emailName">官方邮箱</span>
             <span class="cs-detail">team@mewbaka.cn</span>
           </div>
         </a>
         <a href="mailto:join@mewbaka.cn" class="cs-card">
           <div class="cs-icon recruit"><i class="fas fa-user-plus"></i></div>
           <div class="cs-info">
-            <span class="cs-name">招募联系邮箱</span>
+            <span class="cs-name" data-i18n="recruitName">招募联系邮箱</span>
             <span class="cs-detail">join@mewbaka.cn</span>
           </div>
         </a>
       </div>
       <div class="cs-column">
-        <h2 class="cs-heading">外部链接</h2>
-        <p class="cs-sub">工作室在部分网站开设的账号</p>
+        <h2 class="cs-heading" data-i18n="externalTitle">外部链接</h2>
+        <p class="cs-sub" data-i18n="externalSub">工作室在部分网站开设的账号</p>
         <a href="https://github.com/mewbaka" target="_blank" rel="noopener noreferrer" class="cs-card">
           <div class="cs-icon github"><i class="fab fa-github"></i></div>
           <div class="cs-info">
-            <span class="cs-name">GitHub 组织</span>
+            <span class="cs-name" data-i18n="githubName">GitHub 组织</span>
             <span class="cs-detail">mewbaka</span>
           </div>
         </a>
         <a href="https://space.bilibili.com/3546731419535895" target="_blank" rel="noopener noreferrer" class="cs-card">
           <div class="cs-icon bilibili"><i class="fab fa-bilibili"></i></div>
           <div class="cs-info">
-            <span class="cs-name">BiliBili 官方</span>
+            <span class="cs-name" data-i18n="biliName">BiliBili 官方</span>
             <span class="cs-detail">UID3546731419535895</span>
           </div>
         </a>
         <a href="https://afdian.com/a/MewBaka" target="_blank" rel="noopener noreferrer" class="cs-card">
           <div class="cs-icon afdian"><i class="fas fa-bolt"></i></div>
           <div class="cs-info">
-            <span class="cs-name">爱发电官方</span>
+            <span class="cs-name" data-i18n="afdianName">爱发电官方</span>
             <span class="cs-detail">MewBaka</span>
           </div>
         </a>
         <div class="cs-card wechat-card" id="wechatCard">
           <div class="cs-icon wechat"><i class="fab fa-weixin"></i></div>
           <div class="cs-info">
-            <span class="cs-name">微信公众号</span>
-            <span class="cs-detail">扫码关注</span>
+            <span class="cs-name" data-i18n="wechatName">微信公众号</span>
+            <span class="cs-detail" data-i18n="wechatSub">扫码关注</span>
           </div>
           <div class="wechat-popup" id="wechatPopup">
             <img src="assets/images/wechat.webp" alt="微信搜一搜 MewBaka笨猫" loading="lazy" />
@@ -201,7 +213,7 @@
   </div>
 </section>
 
-<button class="back-to-top" id="backToTop" aria-label="回到顶部"><i class="fas fa-arrow-up"></i></button>
+<button class="back-to-top" id="backToTop" data-i18n-aria="backTop" aria-label="回到顶部"><i class="fas fa-arrow-up"></i></button>
 
 </main>
 
@@ -211,7 +223,7 @@
       <img class="light-logo" src="assets/images/logo/dark.webp" alt="MewBaka Logo" />
       <img class="dark-logo" src="assets/images/logo/light.webp" alt="MewBaka Logo" />
     </div>
-    <div class="footer-copy">&copy; 2026 笨猫工作室 MewBaka Studio. All Rights Reserved.</div>
+    <div class="footer-copy" data-i18n="footerCopy">&copy; 2026 笨猫工作室 MewBaka Studio. All Rights Reserved.</div>
   </div>
 </footer>
 
