@@ -152,13 +152,16 @@
     langDropdown.classList.toggle('open');
   });
 
+  /* 用户主动选择语言时才写入偏好：localStorage 里的值即「用户的明确选择」 */
+  function switchLang(lang) {
+    if (!translations[lang]) return;
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+    applyTranslations(lang);
+  }
+
   langOptions.forEach(function (opt) {
     opt.addEventListener('click', function () {
-      var lang = this.getAttribute('data-lang');
-      if (!translations[lang]) return;
-      /* 只有用户主动点击才写入偏好，localStorage 里的值即「用户的明确选择」 */
-      try { localStorage.setItem('lang', lang); } catch (e) {}
-      applyTranslations(lang);
+      switchLang(this.getAttribute('data-lang'));
       langDropdown.classList.remove('open');
     });
   });
@@ -169,6 +172,98 @@
   langDropdown.addEventListener('click', function (e) {
     e.stopPropagation();
   });
+
+  /* ===== 语言提示横幅 =====
+     浏览器环境是英文/日文、且用户还没在本站选过语言时，用对应语言提示「可以切换」。
+     它只是提示，绝不自动切换 —— 按环境语言自动切换正是首页被误收录成英文的原因。
+
+     整段由 JS 动态创建，不写进 index.html：静态源码保持纯中文，
+     curl 抓到的仍是中文页面；元素上标注 lang 属性，
+     让搜索引擎知道这一小块是外语片段，页面主体语言仍为 html[lang] 声明的 zh-CN。 */
+  var LANG_BANNER = {
+    en: {
+      text: 'This site is displayed in Chinese. Would you like to switch to English?',
+      action: 'Switch to English',
+      close: 'Dismiss'
+    },
+    ja: {
+      text: 'このサイトは中国語で表示されています。日本語に切り替えますか？',
+      action: '日本語に切り替える',
+      close: '閉じる'
+    }
+  };
+
+  function detectBannerLang() {
+    /* 只决定「要不要提示」，绝不用来决定页面实际语言 */
+    var navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+    if (navLang.indexOf('ja') === 0) return 'ja';
+    if (navLang.indexOf('en') === 0) return 'en';
+    return null;
+  }
+
+  function initLangBanner() {
+    var stored = null;
+    var dismissed = null;
+    try {
+      stored = localStorage.getItem('lang');
+      dismissed = localStorage.getItem('langBannerDismissed');
+    } catch (e) {}
+    if (stored || dismissed) return; // 已选过语言，或已手动关闭过提示
+
+    var lang = detectBannerLang();
+    if (!lang) return;
+    var t = LANG_BANNER[lang];
+
+    var banner = document.createElement('div');
+    banner.className = 'lang-banner';
+    banner.setAttribute('lang', lang);
+    banner.setAttribute('role', 'region');
+    banner.setAttribute('aria-label', t.action);
+    banner.innerHTML =
+      '<svg class="icon icon-w125 lang-banner-icon" aria-hidden="true"><use href="#i-language"/></svg>' +
+      '<div class="lang-banner-body">' +
+        '<p class="lang-banner-text"></p>' +
+        '<button type="button" class="lang-banner-switch"></button>' +
+      '</div>' +
+      '<button type="button" class="lang-banner-close">×</button>';
+
+    var switchBtn = banner.querySelector('.lang-banner-switch');
+    var closeBtn = banner.querySelector('.lang-banner-close');
+    /* 文案一律用 textContent 写入，不让它们被当成 HTML 解析 */
+    banner.querySelector('.lang-banner-text').textContent = t.text;
+    switchBtn.textContent = t.action;
+    closeBtn.setAttribute('aria-label', t.close);
+    document.body.appendChild(banner);
+
+    function hide() {
+      banner.classList.remove('show');
+      document.removeEventListener('keydown', onKeydown);
+      setTimeout(function () {
+        if (banner.parentNode) banner.parentNode.removeChild(banner);
+      }, 300); // 等淡出过渡结束再移除
+    }
+    function dismiss() {
+      try { localStorage.setItem('langBannerDismissed', '1'); } catch (e) {}
+      hide();
+    }
+    function onKeydown(e) {
+      if (e.key === 'Escape') dismiss();
+    }
+
+    switchBtn.addEventListener('click', function () {
+      switchLang(lang); // 会写入 lang 偏好，下次进站不再提示
+      hide();
+    });
+    closeBtn.addEventListener('click', dismiss);
+    document.addEventListener('keydown', onKeydown);
+
+    /* 下一帧再加 .show，保证入场过渡能触发 */
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { banner.classList.add('show'); });
+    });
+  }
+
+  initLangBanner();
 
   /* 主题已由 index.html 头部的内联脚本在首屏绘制前设置好，此处只处理切换 */
   function setTheme(theme) {

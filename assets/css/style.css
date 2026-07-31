@@ -226,3 +226,23 @@ body,.header-inner,.card,.btn,.nav-links a,.theme-toggle{transition:background .
 .back-to-top{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:50%;background:var(--primary);color:#fff;border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s,visibility .3s,transform .3s,background .2s;z-index:90;box-shadow:0 4px 12px rgba(0,0,0,.15)}
 .back-to-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
 .back-to-top:hover{background:var(--primary-hover)}
+
+/* ===== LANGUAGE SUGGESTION BANNER =====
+   仅当浏览器环境为英文/日文、且用户尚未选择过语言时，由 main.js 动态插入。
+   刻意不写进 index.html：静态源码里保持纯中文，爬虫抓到的仍是中文页面。
+   定位避开 .back-to-top（右下 32px，44px 见方）：桌面端靠左，移动端上移。 */
+.lang-banner{position:fixed;bottom:24px;left:24px;z-index:95;max-width:400px;display:flex;align-items:flex-start;gap:12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:0 8px 24px rgba(0,0,0,.12);opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s,visibility .3s,transform .3s}
+.lang-banner.show{opacity:1;visibility:visible;transform:translateY(0)}
+.lang-banner-icon{margin-top:3px;color:var(--primary)}
+.lang-banner-body{flex:1;min-width:0}
+.lang-banner-text{font-size:.85rem;line-height:1.5;color:var(--text-secondary);margin-bottom:12px}
+.lang-banner-switch{padding:8px 16px;border-radius:8px;background:var(--primary);color:#fff;border:none;cursor:pointer;font-size:.8rem;font-weight:700;font-family:var(--font-sans);transition:background .2s}
+.lang-banner-switch:hover{background:var(--primary-hover)}
+.lang-banner-close{flex-shrink:0;width:22px;height:22px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;border-radius:6px;font-size:1.1rem;line-height:1;color:var(--text-secondary);font-family:var(--font-sans);transition:background .15s,color .15s}
+.lang-banner-close:hover{background:var(--bg-light);color:var(--text)}
+@media(max-width:768px){
+  .lang-banner{left:12px;right:12px;bottom:88px;max-width:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .lang-banner{transition:none}
+}
