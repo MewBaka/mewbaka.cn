@@ -1,13 +1,13 @@
-document.addEventListener('DOMContentLoaded', function () {
+/* 本文件以 defer 加载：解析完成后立即执行，无需等待 DOMContentLoaded */
+(function () {
   var html = document.documentElement;
   var toggle = document.getElementById('themeToggle');
-  var langWrapper = document.querySelector('.lang-wrapper');
+  var langToggle = document.getElementById('langToggle');
   var langDropdown = document.getElementById('langDropdown');
   var langOptions = document.querySelectorAll('.lang-option');
   var hamburger = document.getElementById('hamburger');
   var navLinks = document.getElementById('navLinks');
   var backToTop = document.getElementById('backToTop');
-  var ldJson = document.getElementById('ldJson');
 
   var translations = {
     'zh-CN': {
@@ -127,15 +127,22 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   function getPreferredLang() {
-    var stored = localStorage.getItem('lang');
+    var stored = null;
+    try { stored = localStorage.getItem('lang'); } catch (e) {}
     if (stored) return stored;
     var navLang = navigator.language || navigator.userLanguage || '';
     return navLang.startsWith('zh') ? 'zh-CN' : navLang.startsWith('ja') ? 'ja' : 'en';
   }
 
-  function applyTranslations(lang) {
+  function applyTranslations(lang, skipDom) {
     var t = translations[lang];
     if (!t) return;
+    langOptions.forEach(function (opt) {
+      opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
+    });
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+    // 首屏语言与 HTML 内置文案一致时跳过整页重写，避免多余的重排
+    if (skipDom) return;
     html.setAttribute('lang', lang === 'zh-CN' ? 'zh-CN' : lang === 'ja' ? 'ja' : 'en');
     document.title = t.siteTitle;
     document.querySelector('meta[name="description"]').setAttribute('content', t.metaDesc);
@@ -153,14 +160,10 @@ document.addEventListener('DOMContentLoaded', function () {
       var key = el.getAttribute('data-i18n-aria');
       if (t[key]) el.setAttribute('aria-label', t[key]);
     });
-    langOptions.forEach(function (opt) {
-      opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
-    });
-    localStorage.setItem('lang', lang);
   }
 
   var currentLang = getPreferredLang();
-  applyTranslations(currentLang);
+  applyTranslations(currentLang, currentLang === 'zh-CN');
 
   langToggle.addEventListener('click', function (e) {
     e.stopPropagation();
@@ -181,18 +184,11 @@ document.addEventListener('DOMContentLoaded', function () {
     e.stopPropagation();
   });
 
-  function getPreferredTheme() {
-    var stored = localStorage.getItem('theme');
-    if (stored) return stored;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-
+  /* 主题已由 index.html 头部的内联脚本在首屏绘制前设置好，此处只处理切换 */
   function setTheme(theme) {
     html.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+    try { localStorage.setItem('theme', theme); } catch (e) {}
   }
-
-  setTheme(getPreferredTheme());
 
   toggle.addEventListener('click', function () {
     var current = html.getAttribute('data-theme');
@@ -211,22 +207,46 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   var navLinkItems = document.querySelectorAll('.nav-links a[href^="#"]');
-  var sections = document.querySelectorAll('section[id]');
 
-  function updateActive() {
-    var current = '';
-    sections.forEach(function (section) {
-      var top = section.offsetTop - 100;
-      if (window.scrollY >= top) {
-        current = section.getAttribute('id');
-      }
+  /* 只跟踪真正有导航项的 section。#blog 没有对应导航项，
+     若把它算进来，滚到它上面时高亮就会整个消失 */
+  var trackedSections = [];
+  navLinkItems.forEach(function (link) {
+    var target = document.querySelector(link.getAttribute('href'));
+    if (target && target.id) trackedSections.push({ el: target, link: link });
+  });
+
+  function setActive(link) {
+    navLinkItems.forEach(function (item) {
+      item.classList.toggle('active', item === link);
     });
-    navLinkItems.forEach(function (link) {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === '#' + current) {
-        link.classList.add('active');
-      }
+  }
+
+  if (window.IntersectionObserver && trackedSections.length) {
+    /* 以「在视口内露出的高度」判定当前 section：比原来的 offsetTop 阈值法更准，
+       而且滚到页面底部时最后一个 section 一定能胜出（原来它会被 #blog 挡住） */
+    var visibleHeight = {};
+    var thresholds = [];
+    for (var i = 0; i <= 20; i++) thresholds.push(i / 20);
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        visibleHeight[entry.target.id] = entry.isIntersecting ? entry.intersectionRect.height : 0;
+      });
+      var best = null;
+      var bestHeight = 0;
+      trackedSections.forEach(function (s) {
+        var h = visibleHeight[s.el.id] || 0;
+        if (h > bestHeight) { bestHeight = h; best = s.link; }
+      });
+      /* 全部为 0（例如正停在 #blog 上）时保持当前高亮，避免闪烁 */
+      if (best) setActive(best);
+    }, {
+      threshold: thresholds,
+      rootMargin: '-64px 0px 0px 0px' /* 扣掉吸顶 header，被挡住的部分不算露出 */
     });
+
+    trackedSections.forEach(function (s) { observer.observe(s.el); });
   }
 
   function updateBackToTop() {
@@ -237,11 +257,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  /* 用 rAF 节流滚动回调，避免每个滚动事件都做一次 DOM 写入 */
+  var ticking = false;
   window.addEventListener('scroll', function () {
-    updateActive();
-    updateBackToTop();
-  });
-  updateActive();
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () {
+      ticking = false;
+      updateBackToTop();
+    });
+  }, { passive: true });
   updateBackToTop();
 
   navLinkItems.forEach(function (link) {
@@ -278,4 +303,4 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
-});
+})();
