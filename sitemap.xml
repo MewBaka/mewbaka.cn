@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<!-- 站内只有 / 这一个真实页面：/en/ 与 /ja/ 并不存在，因此不声明 hreflang alternate -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mewbaka.cn/</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://mewbaka.cn/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://mewbaka.cn/en/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://mewbaka.cn/ja/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://mewbaka.cn/" />
-    <lastmod>2026-07-03</lastmod>
+    <lastmod>2026-08-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>

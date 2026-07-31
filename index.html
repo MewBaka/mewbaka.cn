@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===================================================================
+       SEO 元数据区：全部静态定义，首页固定为简体中文。
+       任何脚本都不得在运行时修改 title / description / keywords /
+       og:* / twitter:* / canonical，否则爬虫（Googlebot、Bingbot 通常以
+       en-US 环境执行 JS）渲染后会把中文首页收录成英文描述。
+       正文的多语言切换见 assets/js/main.js，仅作用于可见文案。
+       =================================================================== -->
   <title>MewBaka 笨猫</title>
   <meta name="description" content="MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者，致力于创造有趣的视觉小说体验" />
   <meta name="keywords" content="MewBaka,笨猫,视觉小说,NarraLeaf,Visual Novel,游戏引擎,独立游戏" />
@@ -11,10 +19,8 @@
   <meta name="theme-color" content="#40A8C4" />
   <meta name="color-scheme" content="light dark" />
   <link rel="canonical" href="https://mewbaka.cn/" />
-  <link rel="alternate" hreflang="zh-CN" href="https://mewbaka.cn/" />
-  <link rel="alternate" hreflang="en" href="https://mewbaka.cn/en/" />
-  <link rel="alternate" hreflang="ja" href="https://mewbaka.cn/ja/" />
-  <link rel="alternate" hreflang="x-default" href="https://mewbaka.cn/" />
+  <!-- 站内只有 / 这一个真实页面，/en/ 与 /ja/ 并不存在，
+       故不声明 hreflang alternate（声明不存在的 URL 会被搜索引擎判为无效） -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="MewBaka 笨猫" />
   <meta property="og:description" content="MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者" />

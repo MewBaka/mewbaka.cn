@@ -9,15 +9,12 @@
   var navLinks = document.getElementById('navLinks');
   var backToTop = document.getElementById('backToTop');
 
+  /* i18n 只负责页面正文的可见文案。
+     title / description / keywords / og:* / twitter:* / canonical 属于 SEO 元数据，
+     一律由 index.html 静态定义，本文件不得写入，否则以 en-US 环境执行 JS 的爬虫
+     会把中文首页收录成英文描述。请勿在此处再添加 metaDesc / ogTitle 之类的键。 */
   var translations = {
     'zh-CN': {
-      siteTitle: 'MewBaka 笨猫',
-      metaDesc: 'MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者，致力于创造有趣的视觉小说体验',
-      metaKeywords: 'MewBaka,笨猫,视觉小说,NarraLeaf,Visual Novel,游戏引擎,独立游戏',
-      ogTitle: 'MewBaka 笨猫',
-      ogDesc: 'MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者',
-      twitterTitle: 'MewBaka 笨猫',
-      twitterDesc: 'MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者',
       navHome: '主页',
       navNarraLeaf: 'NarraLeaf',
       navContact: '联系我们',
@@ -49,13 +46,6 @@
       footerCopy: '\u00a9 2026 笨猫工作室 MewBaka Studio. All Rights Reserved.'
     },
     en: {
-      siteTitle: 'MewBaka Studio',
-      metaDesc: 'MewBaka Studio official website - Developer of NarraLeaf Project visual novel engine, dedicated to creating fun visual novel experiences',
-      metaKeywords: 'MewBaka,Visual Novel,NarraLeaf,game engine,indie game',
-      ogTitle: 'MewBaka Studio',
-      ogDesc: 'MewBaka Studio official website - Developer of NarraLeaf Project visual novel engine',
-      twitterTitle: 'MewBaka Studio',
-      twitterDesc: 'MewBaka Studio official website - Developer of NarraLeaf Project visual novel engine',
       navHome: 'Home',
       navNarraLeaf: 'NarraLeaf',
       navContact: 'Contact',
@@ -87,13 +77,6 @@
       footerCopy: '\u00a9 2026 B\u00e8nM\u0101o Studio MewBaka Studio. All Rights Reserved.'
     },
     ja: {
-      siteTitle: 'MewBaka \u7b28\u732b',
-      metaDesc: 'MewBaka \u7b28\u732b\u30b9\u30bf\u30b8\u30aa\u516c\u5f0f\u30a6\u30a7\u30d6\u30b5\u30a4\u30c8 - \u30d3\u30b8\u30e5\u30a2\u30eb\u30ce\u30d9\u30eb\u30b2\u30fc\u30e0\u30a8\u30f3\u30b8\u30f3 NarraLeaf Project \u306e\u958b\u767a\u8005',
-      metaKeywords: 'MewBaka,\u7b28\u732b,\u30d3\u30b8\u30e5\u30a2\u30eb\u30ce\u30d9\u30eb,NarraLeaf,\u30b2\u30fc\u30e0\u30a8\u30f3\u30b8\u30f3,\u30a4\u30f3\u30c7\u30a3\u30fc\u30b2\u30fc\u30e0',
-      ogTitle: 'MewBaka \u7b28\u732b',
-      ogDesc: 'MewBaka \u7b28\u732b\u30b9\u30bf\u30b8\u30aa\u516c\u5f0f\u30a6\u30a7\u30d6\u30b5\u30a4\u30c8 - \u30d3\u30b8\u30e5\u30a2\u30eb\u30ce\u30d9\u30eb\u30b2\u30fc\u30e0\u30a8\u30f3\u30b8\u30f3 NarraLeaf Project \u306e\u958b\u767a\u8005',
-      twitterTitle: 'MewBaka \u7b28\u732b',
-      twitterDesc: 'MewBaka \u7b28\u732b\u30b9\u30bf\u30b8\u30aa\u516c\u5f0f\u30a6\u30a7\u30d6\u30b5\u30a4\u30c8 - \u30d3\u30b8\u30e5\u30a2\u30eb\u30ce\u30d9\u30eb\u30b2\u30fc\u30e0\u30a8\u30f3\u30b8\u30f3 NarraLeaf Project \u306e\u958b\u767a\u8005',
       navHome: '\u30db\u30fc\u30e0',
       navNarraLeaf: 'NarraLeaf',
       navContact: '\u304a\u554f\u3044\u5408\u308f\u305b',
@@ -126,12 +109,17 @@
     }
   };
 
+  /* index.html 静态文案所使用的语言，也是唯一被搜索引擎收录的语言 */
+  var DEFAULT_LANG = 'zh-CN';
+
   function getPreferredLang() {
+    /* 只认用户在本站主动选择并存下来的语言，不再读取 navigator.language：
+       爬虫的运行环境几乎都是 en-US，一旦按环境语言自动切换，
+       渲染后的正文会变成英文，首页就会被判定为英文页面。
+       没有存过选择时（包括所有爬虫）一律使用中文。 */
     var stored = null;
     try { stored = localStorage.getItem('lang'); } catch (e) {}
-    if (stored) return stored;
-    var navLang = navigator.language || navigator.userLanguage || '';
-    return navLang.startsWith('zh') ? 'zh-CN' : navLang.startsWith('ja') ? 'ja' : 'en';
+    return translations[stored] ? stored : DEFAULT_LANG;
   }
 
   function applyTranslations(lang, skipDom) {
@@ -140,18 +128,12 @@
     langOptions.forEach(function (opt) {
       opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
     });
-    try { localStorage.setItem('lang', lang); } catch (e) {}
     // 首屏语言与 HTML 内置文案一致时跳过整页重写，避免多余的重排
     if (skipDom) return;
-    html.setAttribute('lang', lang === 'zh-CN' ? 'zh-CN' : lang === 'ja' ? 'ja' : 'en');
-    document.title = t.siteTitle;
-    document.querySelector('meta[name="description"]').setAttribute('content', t.metaDesc);
-    document.querySelector('meta[name="keywords"]').setAttribute('content', t.metaKeywords);
-    document.querySelector('meta[property="og:locale"]').setAttribute('content', lang === 'zh-CN' ? 'zh_CN' : lang === 'ja' ? 'ja_JP' : 'en_US');
-    document.querySelector('meta[property="og:title"]').setAttribute('content', t.ogTitle);
-    document.querySelector('meta[property="og:description"]').setAttribute('content', t.ogDesc);
-    document.querySelector('meta[name="twitter:title"]').setAttribute('content', t.twitterTitle);
-    document.querySelector('meta[name="twitter:description"]').setAttribute('content', t.twitterDesc);
+    /* 只改正文与 html[lang]（保证屏幕阅读器读音正确）。
+       document.title 与 meta[name=description] / og:* / twitter:* 一律不动，
+       它们只由 index.html 静态决定。 */
+    html.setAttribute('lang', lang);
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       var key = el.getAttribute('data-i18n');
       if (t[key]) el.innerHTML = t[key];
@@ -163,7 +145,7 @@
   }
 
   var currentLang = getPreferredLang();
-  applyTranslations(currentLang, currentLang === 'zh-CN');
+  applyTranslations(currentLang, currentLang === DEFAULT_LANG);
 
   langToggle.addEventListener('click', function (e) {
     e.stopPropagation();
@@ -172,7 +154,11 @@
 
   langOptions.forEach(function (opt) {
     opt.addEventListener('click', function () {
-      applyTranslations(this.getAttribute('data-lang'));
+      var lang = this.getAttribute('data-lang');
+      if (!translations[lang]) return;
+      /* 只有用户主动点击才写入偏好，localStorage 里的值即「用户的明确选择」 */
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+      applyTranslations(lang);
       langDropdown.classList.remove('open');
     });
   });
