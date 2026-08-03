@@ -18,6 +18,7 @@
       navHome: '主页',
       navNarraLeaf: 'NarraLeaf',
       navContact: '联系我们',
+      navFriends: '友情链接',
       navBlog: '博客',
       langLabel: '切换语言',
       themeLabel: '切换主题',
@@ -43,12 +44,16 @@
       afdianName: '爱发电官方',
       wechatName: '微信公众号',
       wechatSub: '扫码关注',
+      friendsTitle: '友情链接',
+      friendsSub: '一同做着有趣事情的伙伴们，欢迎去看看',
+      friendSflDesc: 'Minecraft 综合型开发团队；始创于 2021 年，专注 MC 皮肤、建筑、Addon、Vocaloid 音乐企划，MC 中国版累计下载量超 2000 万。',
       footerCopy: '\u00a9 2026 笨猫工作室 MewBaka Studio. All Rights Reserved.'
     },
     en: {
       navHome: 'Home',
       navNarraLeaf: 'NarraLeaf',
       navContact: 'Contact',
+      navFriends: 'Friends',
       navBlog: 'Blog',
       langLabel: 'Switch Language',
       themeLabel: 'Toggle Theme',
@@ -74,12 +79,16 @@
       afdianName: 'Afdian Official',
       wechatName: 'WeChat Official',
       wechatSub: 'Scan to Follow',
+      friendsTitle: 'Friend Links',
+      friendsSub: 'Friends who are building fun things too \u2014 go take a look',
+      friendSflDesc: 'An all-round Minecraft development team. Founded in 2021, focused on MC skins, builds, Add-Ons and Vocaloid music projects, with over 20 million total downloads on Minecraft China Edition.',
       footerCopy: '\u00a9 2026 B\u00e8nM\u0101o Studio MewBaka Studio. All Rights Reserved.'
     },
     ja: {
       navHome: '\u30db\u30fc\u30e0',
       navNarraLeaf: 'NarraLeaf',
       navContact: '\u304a\u554f\u3044\u5408\u308f\u305b',
+      navFriends: '\u76f8\u4e92\u30ea\u30f3\u30af',
       navBlog: '\u30d6\u30ed\u30b0',
       langLabel: '\u8a00\u8a9e\u5207\u308a\u66ff\u3048',
       themeLabel: '\u30c6\u30fc\u30de\u5207\u308a\u66ff\u3048',
@@ -105,6 +114,9 @@
       afdianName: 'Afdian \u516c\u5f0f',
       wechatName: 'WeChat \u516c\u5f0f',
       wechatSub: '\u30b9\u30ad\u30e3\u30f3\u3057\u3066\u30d5\u30a9\u30ed\u30fc',
+      friendsTitle: '\u76f8\u4e92\u30ea\u30f3\u30af',
+      friendsSub: '\u9762\u767d\u3044\u3053\u3068\u306b\u53d6\u308a\u7d44\u3080\u4ef2\u9593\u305f\u3061\u3001\u305c\u3072\u8997\u3044\u3066\u307f\u3066\u304f\u3060\u3055\u3044',
+      friendSflDesc: 'Minecraft \u306e\u7dcf\u5408\u958b\u767a\u30c1\u30fc\u30e0\u30022021\u5e74\u8a2d\u7acb\u3001MC \u30b9\u30ad\u30f3\u30fb\u5efa\u7bc9\u30fb\u30a2\u30c9\u30aa\u30f3\u30fb\u30dc\u30fc\u30ab\u30ed\u30a4\u30c9\u97f3\u697d\u4f01\u753b\u3092\u624b\u304c\u3051\u3001MC \u4e2d\u56fd\u7248\u306e\u7d2f\u8a08\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u6570\u306f2000\u4e07\u8d85\u3002',
       footerCopy: '\u00a9 2026 \u7b28\u732b\u30b9\u30bf\u30b8\u30aa MewBaka Studio. All Rights Reserved.'
     }
   };
@@ -303,9 +315,15 @@
     });
   }
 
+  var HEADER_H = 64; /* 吸顶 header 的高度，被它盖住的部分不算露出 */
+
   if (window.IntersectionObserver && trackedSections.length) {
-    /* 以「在视口内露出的高度」判定当前 section：比原来的 offsetTop 阈值法更准，
-       而且滚到页面底部时最后一个 section 一定能胜出（原来它会被 #blog 挡住） */
+    /* 以「露出比例」判定当前 section：露出高度 ÷ 它自己能露出的最大高度
+       （section 高度与可视区高度取小者）。
+       不能直接比露出高度 —— #friends 比可视区矮得多，页面又滚不过它，
+       停在页面底部时它露得再全，绝对高度也赢不过上面的 #contact，
+       导航就永远高亮不到它。换成比例后，整节都露出来的一方胜出。
+       比可视区高的长 section 分母同为可视区高，排序与原来一致。 */
     var visibleHeight = {};
     var thresholds = [];
     for (var i = 0; i <= 20; i++) thresholds.push(i / 20);
@@ -315,16 +333,19 @@
         visibleHeight[entry.target.id] = entry.isIntersecting ? entry.intersectionRect.height : 0;
       });
       var best = null;
-      var bestHeight = 0;
+      var bestRatio = 0;
+      var rootH = window.innerHeight - HEADER_H;
       trackedSections.forEach(function (s) {
         var h = visibleHeight[s.el.id] || 0;
-        if (h > bestHeight) { bestHeight = h; best = s.link; }
+        if (!h) return;
+        var ratio = h / Math.max(1, Math.min(s.el.offsetHeight, rootH));
+        if (ratio > bestRatio) { bestRatio = ratio; best = s.link; }
       });
       /* 全部为 0（例如正停在 #blog 上）时保持当前高亮，避免闪烁 */
       if (best) setActive(best);
     }, {
       threshold: thresholds,
-      rootMargin: '-64px 0px 0px 0px' /* 扣掉吸顶 header，被挡住的部分不算露出 */
+      rootMargin: '-' + HEADER_H + 'px 0px 0px 0px'
     });
 
     trackedSections.forEach(function (s) { observer.observe(s.el); });
