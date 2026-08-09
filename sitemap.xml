@@ -1,10 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 站内只有 / 这一个真实页面：/en/ 与 /ja/ 并不存在，因此不声明 hreflang alternate -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<!-- 三个语言页面互为 alternate；根路径 / 只是跳转壳，canonical 指向 /zh/，故不收录。
+     每个 <url> 都要列全整组 hreflang（含自身与 x-default），少一条 Google 会忽略整组。 -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://mewbaka.cn/</loc>
-    <lastmod>2026-08-09</lastmod>
+    <loc>https://mewbaka.cn/zh/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://mewbaka.cn/zh/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mewbaka.cn/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mewbaka.cn/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mewbaka.cn/zh/"/>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://mewbaka.cn/en/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://mewbaka.cn/zh/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mewbaka.cn/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mewbaka.cn/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mewbaka.cn/zh/"/>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mewbaka.cn/ja/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://mewbaka.cn/zh/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mewbaka.cn/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mewbaka.cn/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mewbaka.cn/zh/"/>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

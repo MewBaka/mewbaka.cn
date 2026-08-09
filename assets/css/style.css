@@ -63,9 +63,11 @@ header{position:sticky;top:0;z-index:100;background:var(--header-bg);backdrop-fi
 .logo img{height:30px;width:auto}
 .header-right{display:flex;align-items:center;gap:24px}
 .nav-links{display:flex;gap:32px;align-items:center}
-.nav-links a{font-size:.95rem;font-weight:500;color:var(--text-secondary);transition:color .2s;position:relative}
-.nav-links a:hover,.nav-links a.active{color:var(--text)}
-.nav-links a.active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--primary);border-radius:1px}
+/* 一律用直接子选择器 .nav-links>a：语言下拉里的每一项现在也是 <a>，
+   但它嵌在 .nav-actions 里，不该套用导航项的字号、下划线和移动端分隔线 */
+.nav-links>a{font-size:.95rem;font-weight:500;color:var(--text-secondary);transition:color .2s;position:relative}
+.nav-links>a:hover,.nav-links>a.active{color:var(--text)}
+.nav-links>a.active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--primary);border-radius:1px}
 .nav-actions{display:flex;align-items:center;gap:16px}
 .nav-actions .nav-icon{font-size:1.15rem;color:var(--text-secondary);transition:color .2s}
 .nav-actions .nav-icon:hover{color:var(--text)}
@@ -74,7 +76,7 @@ header{position:sticky;top:0;z-index:100;background:var(--header-bg);backdrop-fi
 .lang-wrapper{position:relative}
 .lang-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:4px;box-shadow:0 8px 24px rgba(0,0,0,.1);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .2s,visibility .2s,transform .2s;z-index:50;min-width:120px}
 .lang-dropdown.open{opacity:1;visibility:visible;transform:translateY(0)}
-.lang-option{display:block;width:100%;padding:8px 16px;background:none;border:none;cursor:pointer;font-size:.85rem;font-weight:500;color:var(--text-secondary);text-align:left;border-radius:8px;transition:background .15s,color .15s;font-family:var(--font-sans)}
+.lang-option{display:block;width:100%;padding:8px 16px;background:none;border:none;cursor:pointer;font-size:.85rem;font-weight:500;color:var(--text-secondary);text-align:left;white-space:nowrap;border-radius:8px;transition:background .15s,color .15s;font-family:var(--font-sans)}
 .lang-option:hover{background:var(--bg-light);color:var(--text)}
 .lang-option.active{color:var(--text);font-weight:700}
 .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px}
@@ -210,9 +212,9 @@ footer{border-top:1px solid var(--border);padding:24px 0}
   .hamburger{display:flex}
   .nav-links{display:none;position:absolute;top:56px;left:0;right:0;flex-direction:column;gap:0;background:var(--header-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:8px 0}
   .nav-links.open{display:flex}
-  .nav-links a{padding:12px 24px;font-size:.95rem;border-bottom:1px solid var(--border)}
-  .nav-links a:last-of-type{border-bottom:none}
-  .nav-links a.active::after{display:none}
+  .nav-links>a{padding:12px 24px;font-size:.95rem;border-bottom:1px solid var(--border)}
+  .nav-links>a:last-of-type{border-bottom:none}
+  .nav-links>a.active::after{display:none}
   .nav-actions{padding:8px 24px 4px;gap:16px;justify-content:flex-start}
   .nav-actions .nav-icon{font-size:1.3rem}
   .nav-actions .lang-toggle{font-size:1.2rem}
@@ -231,7 +233,7 @@ footer{border-top:1px solid var(--border);padding:24px 0}
 }
 
 /* ===== THEME TRANSITION ===== */
-body,.header-inner,.card,.btn,.nav-links a{transition:background .3s,color .3s,border-color .3s,box-shadow .3s}
+body,.header-inner,.card,.btn,.nav-links>a{transition:background .3s,color .3s,border-color .3s,box-shadow .3s}
 
 /* ===== SELECTION ===== */
 ::selection{background:rgba(64,168,196,.25);color:inherit}
@@ -254,8 +256,9 @@ body,.header-inner,.card,.btn,.nav-links a{transition:background .3s,color .3s,b
 .lang-banner-icon{margin-top:3px;color:var(--primary)}
 .lang-banner-body{flex:1;min-width:0}
 .lang-banner-text{font-size:.85rem;line-height:1.5;color:var(--text-secondary);margin-bottom:12px}
-.lang-banner-switch{padding:8px 16px;border-radius:8px;background:var(--primary);color:#fff;border:none;cursor:pointer;font-size:.8rem;font-weight:700;font-family:var(--font-sans);transition:background .2s}
-.lang-banner-switch:hover{background:var(--primary-hover)}
+/* 是 <a> 不是 <button>：切换语言 = 跳转到另一个 URL，所以要 display 成块级可点区域 */
+.lang-banner-switch{display:inline-block;padding:8px 16px;border-radius:8px;background:var(--primary);color:#fff;border:none;cursor:pointer;font-size:.8rem;font-weight:700;font-family:var(--font-sans);transition:background .2s}
+.lang-banner-switch:hover{background:var(--primary-hover);color:#fff}
 .lang-banner-close{flex-shrink:0;width:22px;height:22px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;border-radius:6px;font-size:1.1rem;line-height:1;color:var(--text-secondary);font-family:var(--font-sans);transition:background .15s,color .15s}
 .lang-banner-close:hover{background:var(--bg-light);color:var(--text)}
 @media(max-width:768px){
