@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mewbaka.cn/sitemap.xml
+Sitemap: https://www.mewbaka.cn/sitemap.xml

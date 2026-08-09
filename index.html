@@ -5,40 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ===================================================================
-       根路径不再承载任何内容，只负责把访客送到对应语言的真实页面：
-         /zh/  简体中文（默认，也是 x-default）
-         /en/  English
-         /ja/  日本語
-       GitHub Pages 是纯静态托管，发不出 301，只能用内联 JS 跳转，
-       因此这里必须同时给出：
-         1. canonical -> /zh/     告诉搜索引擎真正该收录的是 /zh/
-         2. 页面里的三条真链接     不执行 JS 的爬虫/浏览器也能走到内容页
-       跳转只看 localStorage 里用户上次亲手选过的语言，不看 navigator.language。
-       按浏览器语言自动跳转会把 en-US 环境的爬虫送去 /en/，
-       让中文站在搜索结果里变成英文站 —— 这正是之前踩过的坑。
-       新增语言时记得同步这里的 LANGS、各页面的 hreflang 和 sitemap.xml。
+       正常情况下这个文件永远不会被送出去：vercel.json 里
+       `/` -> `/zh/` 的 308 在读文件系统之前就先跳走了。
+       它只是兜底 —— 万一 vercel.json 丢了或换了托管（仓库里还留着
+       GitHub Pages 时代的 CNAME），站点根路径也不至于直接 404。
+
+       所以这里的行为要和那条 308 保持一致：一律去 /zh/，不看
+       localStorage，也不看 navigator.language。按浏览器语言自动跳转
+       会把 en-US 环境的爬虫送去 /en/，让中文站在搜索结果里变成英文站
+       —— 这正是之前踩过的坑。
+
+       三条真链接是给不执行 JS 的客户端用的；canonical 指向 /zh/，
+       告诉搜索引擎真正该收录的是那个 URL，不是这里。
+       新增语言时记得同步 vercel.json、各页面的 hreflang 和 sitemap.xml。
        =================================================================== -->
   <title>MewBaka 笨猫</title>
   <meta name="description" content="MewBaka 笨猫工作室官方网站 - 视觉小说游戏引擎 NarraLeaf Project 开发者，致力于创造有趣的视觉小说体验" />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#40A8C4" />
   <meta name="color-scheme" content="light dark" />
-  <link rel="canonical" href="https://mewbaka.cn/zh/" />
-  <link rel="alternate" hreflang="zh-CN" href="https://mewbaka.cn/zh/" />
-  <link rel="alternate" hreflang="en" href="https://mewbaka.cn/en/" />
-  <link rel="alternate" hreflang="ja" href="https://mewbaka.cn/ja/" />
-  <link rel="alternate" hreflang="x-default" href="https://mewbaka.cn/zh/" />
+  <link rel="canonical" href="https://www.mewbaka.cn/zh/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://www.mewbaka.cn/zh/" />
+  <link rel="alternate" hreflang="en" href="https://www.mewbaka.cn/en/" />
+  <link rel="alternate" hreflang="ja" href="https://www.mewbaka.cn/ja/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.mewbaka.cn/zh/" />
   <link rel="icon" href="/favicon.ico" />
 
   <script>
-    (function () {
-      var LANGS = { 'zh-CN': '/zh/', en: '/en/', ja: '/ja/' };
-      var target = null;
-      /* 只认用户在本站主动选过并存下来的语言；没存过（含所有爬虫）一律去中文页 */
-      try { target = LANGS[localStorage.getItem('lang')] || null; } catch (e) {}
-      /* replace 而不是 assign：不留历史记录，返回键不会在这里来回弹 */
-      location.replace((target || '/zh/') + location.search + location.hash);
-    })();
+    /* replace 而不是 assign：不留历史记录，返回键不会在这里来回弹 */
+    location.replace('/zh/' + location.search + location.hash);
   </script>
 
   <style>
