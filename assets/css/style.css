@@ -20,16 +20,20 @@
   --max-w:1200px;
   --font-sans:'HarmonyOS Sans',-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
 }
-[data-theme="dark"]{
-  --text:#e8e8e8;
-  --text-secondary:#aaa;
-  --bg:#111;
-  --bg-light:#1a1a1a;
-  --card-bg:#1e1e1e;
-  --border:#333;
-  --header-bg:rgba(17,17,17,.92);
-  --primary:#5BBDD4;
-  --primary-hover:#4AACC4;
+/* 深浅主题完全跟随操作系统：没有切换按钮，也不读写任何本地偏好。
+   全部深色规则都写在这个媒体查询里，别再引入 [data-theme] 之类的手动开关。 */
+@media(prefers-color-scheme:dark){
+  :root{
+    --text:#e8e8e8;
+    --text-secondary:#aaa;
+    --bg:#111;
+    --bg-light:#1a1a1a;
+    --card-bg:#1e1e1e;
+    --border:#333;
+    --header-bg:rgba(17,17,17,.92);
+    --primary:#5BBDD4;
+    --primary-hover:#4AACC4;
+  }
 }
 html{scroll-behavior:smooth;font-size:16px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
@@ -165,7 +169,7 @@ header{position:sticky;top:0;z-index:100;background:var(--header-bg);backdrop-fi
 .friend-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.06)}
 /* 对方 Logo 是纯黑线稿（透明底），深色主题下整体反相为纯白，否则会糊在深色卡片上 */
 .friend-logo{height:104px;width:auto;flex-shrink:0;transition:transform .3s ease}
-[data-theme="dark"] .friend-logo{filter:invert(1)}
+@media(prefers-color-scheme:dark){.friend-logo{filter:invert(1)}}
 .friend-card:hover .friend-logo{transform:scale(1.06)}
 .friend-info{display:flex;flex-direction:column;gap:6px;min-width:0}
 .friend-name{font-size:1rem;font-weight:700}
@@ -179,17 +183,13 @@ footer{border-top:1px solid var(--border);padding:24px 0}
 .footer-copy{font-size:.8rem;color:#999}
 
 /* ===== LOGO THEME SWITCH ===== */
+/* 深色 logo 用在浅色底上，浅色 logo 用在深色底上 */
 .light-logo{display:block}
 .dark-logo{display:none}
-[data-theme="dark"] .light-logo{display:none}
-[data-theme="dark"] .dark-logo{display:block}
-
-/* ===== THEME TOGGLE ===== */
-.theme-toggle{background:none;border:none;cursor:pointer;padding:0;font-size:.95rem;color:var(--text-secondary);transition:color .2s;line-height:1}
-.theme-toggle:hover{color:var(--text)}
-.theme-toggle .icon-sun{display:none}
-[data-theme="dark"] .theme-toggle .icon-moon{display:none}
-[data-theme="dark"] .theme-toggle .icon-sun{display:inline-block}
+@media(prefers-color-scheme:dark){
+  .light-logo{display:none}
+  .dark-logo{display:block}
+}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
@@ -216,7 +216,6 @@ footer{border-top:1px solid var(--border);padding:24px 0}
   .nav-links a.active::after{display:none}
   .nav-actions{padding:8px 24px 4px;gap:16px;justify-content:flex-start}
   .nav-actions .nav-icon{font-size:1.3rem}
-  .nav-actions .theme-toggle{font-size:1.1rem}
   .nav-actions .lang-toggle{font-size:1.2rem}
   .logo img{height:36px}
   .footer-inner{flex-direction:column;gap:12px;text-align:center}
@@ -233,7 +232,7 @@ footer{border-top:1px solid var(--border);padding:24px 0}
 }
 
 /* ===== THEME TRANSITION ===== */
-body,.header-inner,.card,.btn,.nav-links a,.theme-toggle{transition:background .3s,color .3s,border-color .3s,box-shadow .3s}
+body,.header-inner,.card,.btn,.nav-links a{transition:background .3s,color .3s,border-color .3s,box-shadow .3s}
 
 /* ===== SELECTION ===== */
 ::selection{background:rgba(64,168,196,.25);color:inherit}

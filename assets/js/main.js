@@ -1,7 +1,6 @@
 /* 本文件以 defer 加载：解析完成后立即执行，无需等待 DOMContentLoaded */
 (function () {
   var html = document.documentElement;
-  var toggle = document.getElementById('themeToggle');
   var langToggle = document.getElementById('langToggle');
   var langDropdown = document.getElementById('langDropdown');
   var langOptions = document.querySelectorAll('.lang-option');
@@ -21,7 +20,6 @@
       navFriends: '友情链接',
       navBlog: '博客',
       langLabel: '切换语言',
-      themeLabel: '切换主题',
       menuLabel: '菜单',
       skipLink: '跳转到内容',
       backTop: '回到顶部',
@@ -56,7 +54,6 @@
       navFriends: 'Friends',
       navBlog: 'Blog',
       langLabel: 'Switch Language',
-      themeLabel: 'Toggle Theme',
       menuLabel: 'Menu',
       skipLink: 'Skip to Content',
       backTop: 'Back to Top',
@@ -91,7 +88,6 @@
       navFriends: '\u76f8\u4e92\u30ea\u30f3\u30af',
       navBlog: '\u30d6\u30ed\u30b0',
       langLabel: '\u8a00\u8a9e\u5207\u308a\u66ff\u3048',
-      themeLabel: '\u30c6\u30fc\u30de\u5207\u308a\u66ff\u3048',
       menuLabel: '\u30e1\u30cb\u30e5\u30fc',
       skipLink: '\u30b3\u30f3\u30c6\u30f3\u30c4\u306b\u30b9\u30ad\u30c3\u30d7',
       backTop: '\u30c8\u30c3\u30d7\u3078\u623b\u308b',
@@ -277,22 +273,8 @@
 
   initLangBanner();
 
-  /* 主题已由 index.html 头部的内联脚本在首屏绘制前设置好，此处只处理切换 */
-  function setTheme(theme) {
-    html.setAttribute('data-theme', theme);
-    try { localStorage.setItem('theme', theme); } catch (e) {}
-  }
-
-  toggle.addEventListener('click', function () {
-    var current = html.getAttribute('data-theme');
-    setTheme(current === 'dark' ? 'light' : 'dark');
-  });
-
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
-    if (!localStorage.getItem('theme')) {
-      setTheme(e.matches ? 'dark' : 'light');
-    }
-  });
+  /* 主题不在 JS 里管：深浅色完全交给 style.css 的 prefers-color-scheme 媒体查询，
+     浏览器会在系统切换时自动重算，无需监听 matchMedia，也没有可写的用户偏好。 */
 
   hamburger.addEventListener('click', function () {
     navLinks.classList.toggle('open');
