@@ -124,6 +124,12 @@ header{position:sticky;top:0;z-index:100;background:var(--header-bg);backdrop-fi
 .narraleaf-grid .img-small img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
 .narraleaf-grid .img-small:hover img{transform:scale(1.05)}
 
+/* ===== VNPEN SECTION ===== */
+.vnpen{padding:20px 0 60px}
+.vnpen .btn-group{margin-bottom:0}
+.vnpen-logo{height:64px;width:auto;object-fit:contain;transition:transform .3s ease}
+.vnpen-logo:hover{transform:scale(1.08)}
+
 /* ===== BLOG SECTION ===== */
 .blog{padding:60px 0}
 .blog-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
@@ -200,7 +206,7 @@ footer{border-top:1px solid var(--border);padding:24px 0}
   .hero-blob-blue,.hero-blob-beige{display:none}
   .hero-text h1.doodle::before,.doodle-deco{display:none}
   .section-header{flex-direction:column}
-  .narraleaf-logo{order:-1;align-self:flex-start}
+  .narraleaf-logo,.vnpen-logo{order:-1;align-self:flex-start}
   .narraleaf-grid{grid-template-columns:1fr}
   .narraleaf-grid .img-large{grid-row:auto}
   .blog-grid{grid-template-columns:1fr}
