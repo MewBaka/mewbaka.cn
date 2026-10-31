@@ -163,6 +163,12 @@
   navLinkItems.forEach(function (link) {
     var target = document.querySelector(link.getAttribute('href'));
     if (target && target.id) trackedSections.push({ el: target, link: link });
+    /* 一个导航项可以对应多个 section：data-sections 里列出的 id 也算它的，
+       例如「项目」同时覆盖 #vnpen、#renmori */
+    (link.getAttribute('data-sections') || '').split(/\s+/).forEach(function (id) {
+      var extra = id && document.getElementById(id);
+      if (extra) trackedSections.push({ el: extra, link: link });
+    });
   });
 
   function setActive(link) {

@@ -127,8 +127,20 @@ header{position:sticky;top:0;z-index:100;background:var(--header-bg);backdrop-fi
 /* ===== VNPEN SECTION ===== */
 .vnpen{padding:20px 0 60px}
 .vnpen .btn-group{margin-bottom:0}
-.vnpen-logo{height:64px;width:auto;object-fit:contain;transition:transform .3s ease}
+.vnpen-logo{height:64px;width:auto;object-fit:contain;transition:transform .3s ease;
+  /* 与下方更宽的 RenMori logo 中线对齐：右移出的空白 = 两者宽度差的一半
+     （宽度按各自宽高比 605:173、480:266 由高度推算） */
+  margin-right:calc((173px * 480 / 266 - 64px * 605 / 173) / 2)}
 .vnpen-logo:hover{transform:scale(1.08)}
+
+/* ===== RENMORI SECTION ===== */
+.renmori{padding:40px 0 60px}
+/* 按钮放进左栏，logo 与「标题 + 描述(两行) + 按钮」整块等高：
+   173px 是这块在桌面端的实测高度，改动标题/描述字号或行数时需同步调整 */
+.renmori .section-header{margin-bottom:0}
+.renmori .btn-group{margin:24px 0 0}
+.renmori-logo{height:173px;width:auto;max-width:100%;object-fit:contain;transition:transform .3s ease}
+.renmori-logo:hover{transform:scale(1.08)}
 
 /* ===== BLOG SECTION ===== */
 .blog{padding:60px 0}
@@ -206,7 +218,8 @@ footer{border-top:1px solid var(--border);padding:24px 0}
   .hero-blob-blue,.hero-blob-beige{display:none}
   .hero-text h1.doodle::before,.doodle-deco{display:none}
   .section-header{flex-direction:column}
-  .narraleaf-logo,.vnpen-logo{order:-1;align-self:flex-start}
+  .narraleaf-logo,.vnpen-logo,.renmori-logo{order:-1;align-self:flex-start}
+  .vnpen-logo{margin-right:0}
   .narraleaf-grid{grid-template-columns:1fr}
   .narraleaf-grid .img-large{grid-row:auto}
   .blog-grid{grid-template-columns:1fr}
