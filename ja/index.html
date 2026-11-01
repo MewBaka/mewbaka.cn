@@ -12,11 +12,15 @@
        三份页面的 hreflang 必须互相声明（缺一份 Google 会忽略整组），
        新增语言时记得同步 hreflang、sitemap.xml 与根目录 index.html 的跳转表。
        =================================================================== -->
-  <title>MewBaka スタジオ</title>
-  <meta name="description" content="MewBaka 笨猫 スタジオ公式サイト - ビジュアルノベルゲームエンジン NarraLeaf Project の開発元。楽しいビジュアルノベル体験をお届けします。" />
-  <meta name="keywords" content="MewBaka,笨猫,ビジュアルノベル,NarraLeaf,ノベルゲーム,ゲームエンジン,インディーゲーム" />
+  <title>MewBaka スタジオ｜ノベルゲーム・ビジュアルノベル制作ツール</title>
+  <meta name="description" content="MewBaka 笨猫 スタジオ公式サイト。ノベルゲーム（ビジュアルノベル）制作ツールを開発しています：ゲームエンジン NarraLeaf Project、AI シナリオ執筆ツール VNPen、無料で商用利用できる Ren'Py 暗号化ツール RenMori。" />
+  <meta name="keywords" content="MewBaka,笨猫,ビジュアルノベル,ノベルゲーム,ノベルゲームエンジン,ノベルゲーム制作ツール,NarraLeaf,VNPen,AI シナリオ,RenMori,Ren'Py 暗号化,インディーゲーム" />
   <meta name="author" content="MewBaka" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <!-- 百度：声明同一 URL 同时适配 PC 与移动端，并禁止百度转码/加广告 -->
+  <meta name="applicable-device" content="pc,mobile" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
   <meta name="theme-color" content="#40A8C4" />
   <meta name="color-scheme" content="light dark" />
   <link rel="canonical" href="https://www.mewbaka.cn/ja/" />
@@ -24,17 +28,23 @@
   <link rel="alternate" hreflang="en" href="https://www.mewbaka.cn/en/" />
   <link rel="alternate" hreflang="ja" href="https://www.mewbaka.cn/ja/" />
   <link rel="alternate" hreflang="x-default" href="https://www.mewbaka.cn/zh/" />
+  <!-- 分享图用 JPG 而不是 WebP：微信 / QQ 等国内客户端对 WebP 预览支持不稳定 -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="MewBaka スタジオ" />
-  <meta property="og:description" content="MewBaka 笨猫 スタジオ公式サイト - ビジュアルノベルゲームエンジン NarraLeaf Project の開発元" />
+  <meta property="og:title" content="MewBaka スタジオ｜ノベルゲーム・ビジュアルノベル制作ツール" />
+  <meta property="og:description" content="ノベルゲーム制作ツールの開発元：NarraLeaf ゲームエンジン、VNPen AI シナリオツール、RenMori Ren'Py 暗号化ツール" />
   <meta property="og:url" content="https://www.mewbaka.cn/ja/" />
   <meta property="og:site_name" content="MewBaka" />
+  <meta property="og:image" content="https://www.mewbaka.cn/assets/images/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="MewBaka スタジオ" />
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:locale:alternate" content="zh_CN" />
   <meta property="og:locale:alternate" content="en_US" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="MewBaka スタジオ" />
-  <meta name="twitter:description" content="MewBaka 笨猫 スタジオ公式サイト - ビジュアルノベルゲームエンジン NarraLeaf Project の開発元" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MewBaka スタジオ｜ノベルゲーム・ビジュアルノベル制作ツール" />
+  <meta name="twitter:description" content="ノベルゲーム制作ツールの開発元：NarraLeaf ゲームエンジン、VNPen AI シナリオツール、RenMori Ren'Py 暗号化ツール" />
+  <meta name="twitter:image" content="https://www.mewbaka.cn/assets/images/og.jpg" />
   <link rel="icon" href="/favicon.ico" />
 
   <!-- 主题完全由 CSS 的 prefers-color-scheme 决定，不需要内联脚本抢在首屏前设置，
@@ -47,17 +57,83 @@
   <script type="application/ld+json" id="ldJson">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "MewBaka 笨猫",
-    "alternateName": "MewBaka Studio",
-    "url": "https://www.mewbaka.cn",
-    "logo": "https://www.mewbaka.cn/assets/images/logo/dark.webp",
-    "description": "ビジュアルノベルゲームエンジン NarraLeaf Project の開発元",
-    "sameAs": [
-      "https://github.com/mewbaka",
-      "https://github.com/narraleaf",
-      "https://space.bilibili.com/3546731419535895",
-      "https://afdian.com/a/MewBaka"
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.mewbaka.cn/#organization",
+        "name": "MewBaka 笨猫",
+        "alternateName": [
+          "MewBaka Studio",
+          "笨猫工作室"
+        ],
+        "url": "https://www.mewbaka.cn/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.mewbaka.cn/assets/images/logo/dark.webp",
+          "width": 1474,
+          "height": 333
+        },
+        "email": "team@mewbaka.cn",
+        "description": "ノベルゲーム制作ツールの開発元：NarraLeaf Project、VNPen、RenMori",
+        "brand": [
+          {
+            "@type": "Brand",
+            "name": "NarraLeaf Project",
+            "url": "https://narraleaf.com"
+          },
+          {
+            "@type": "Brand",
+            "name": "VNPen",
+            "url": "https://vnpen.mewbaka.cn"
+          },
+          {
+            "@type": "Brand",
+            "name": "RenMori",
+            "url": "https://renmori.mewbaka.cn"
+          }
+        ],
+        "sameAs": [
+          "https://github.com/mewbaka",
+          "https://github.com/narraleaf",
+          "https://space.bilibili.com/3546731419535895",
+          "https://afdian.com/a/MewBaka"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.mewbaka.cn/#website",
+        "url": "https://www.mewbaka.cn/",
+        "name": "MewBaka 笨猫",
+        "alternateName": "MewBaka Studio",
+        "inLanguage": [
+          "zh-CN",
+          "en",
+          "ja"
+        ],
+        "publisher": {
+          "@id": "https://www.mewbaka.cn/#organization"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.mewbaka.cn/ja/#webpage",
+        "url": "https://www.mewbaka.cn/ja/",
+        "name": "MewBaka スタジオ｜ノベルゲーム・ビジュアルノベル制作ツール",
+        "description": "MewBaka 笨猫 スタジオ公式サイト。ノベルゲーム（ビジュアルノベル）制作ツールを開発しています：ゲームエンジン NarraLeaf Project、AI シナリオ執筆ツール VNPen、無料で商用利用できる Ren'Py 暗号化ツール RenMori。",
+        "inLanguage": "ja",
+        "isPartOf": {
+          "@id": "https://www.mewbaka.cn/#website"
+        },
+        "about": {
+          "@id": "https://www.mewbaka.cn/#organization"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://www.mewbaka.cn/assets/images/og.jpg",
+          "width": 1200,
+          "height": 630
+        }
+      }
     ]
   }
   </script>
@@ -117,7 +193,7 @@
         <img src="/assets/images/banner-960.webp"
              srcset="/assets/images/banner-640.webp 640w, /assets/images/banner-960.webp 960w, /assets/images/banner-1280.webp 1280w"
              sizes="(max-width: 480px) calc(100vw - 24px), (max-width: 768px) calc(100vw - 48px), (max-width: 1200px) calc((100vw - 88px) / 2), 556px"
-             width="1280" height="720" alt="MewBaka スタジオ" fetchpriority="high" decoding="async" />
+             width="1280" height="720" alt="MewBaka スタジオ ビジュアルノベル風の背景イラスト" fetchpriority="high" decoding="async" />
       </div>
     </div>
   </div>
@@ -128,32 +204,32 @@
     <div class="section-header">
       <div class="section-header-text">
         <h2>NarraLeaf Project</h2>
-        <p>MewBaka スタジオが開発するビジュアルノベルゲームエンジン<br/>NarraLeaf Project は、多様なソリューションを提供する現代的なビジュアルノベルゲームエンジンです<br/>柔軟な統合から一体型開発まで、あなたの創造力を引き出します</p>
+        <p>MewBaka スタジオが開発するビジュアルノベルゲームエンジン<br/>NarraLeaf Project は、多様なソリューションを提供する現代的なビジュアルノベル（ノベルゲーム）エンジンです<br/>柔軟な統合から一体型開発まで、あなたの創造力を引き出します</p>
       </div>
       <img src="/assets/images/narraleaf/logo-464.webp" width="460" height="127" alt="NarraLeaf Logo" class="narraleaf-logo" decoding="async" />
     </div>
     <div class="btn-group">
       <a href="https://github.com/narraleaf" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg class="icon icon-w97" aria-hidden="true"><use href="#i-github"/></svg> GitHub 組織へ</a>
-      <a href="https://narraleaf.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">公式サイトへ</a>
+      <a href="https://narraleaf.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">NarraLeaf 公式サイトへ</a>
     </div>
     <div class="narraleaf-grid">
       <div class="img-large">
         <img src="/assets/images/narraleaf/img1-900.webp"
              srcset="/assets/images/narraleaf/img1-600.webp 600w, /assets/images/narraleaf/img1-900.webp 900w, /assets/images/narraleaf/img1-1200.webp 1200w"
              sizes="(max-width: 480px) calc(100vw - 24px), (max-width: 768px) calc(100vw - 48px), (max-width: 1200px) calc((100vw - 64px) / 2), 568px"
-             width="1200" height="1800" alt="NarraLeaf キャラクター" loading="lazy" decoding="async" />
+             width="1200" height="1800" alt="NarraLeaf Project のマスコット 娜拉" loading="lazy" decoding="async" />
       </div>
       <div class="img-small">
         <img src="/assets/images/narraleaf/img2-900.webp"
              srcset="/assets/images/narraleaf/img2-600.webp 600w, /assets/images/narraleaf/img2-900.webp 900w, /assets/images/narraleaf/img2-1200.webp 1200w"
              sizes="(max-width: 480px) calc(100vw - 24px), (max-width: 768px) calc(100vw - 48px), (max-width: 1200px) calc((100vw - 64px) / 2), 568px"
-             width="1200" height="672" alt="NarraLeaf エディター" loading="lazy" decoding="async" />
+             width="1200" height="672" alt="NarraLeaf Studio のビジュアルノベルエディター画面" loading="lazy" decoding="async" />
       </div>
       <div class="img-small">
         <img src="/assets/images/narraleaf/img3-900.webp"
              srcset="/assets/images/narraleaf/img3-600.webp 600w, /assets/images/narraleaf/img3-900.webp 900w, /assets/images/narraleaf/img3-1200.webp 1200w"
              sizes="(max-width: 480px) calc(100vw - 24px), (max-width: 768px) calc(100vw - 48px), (max-width: 1200px) calc((100vw - 64px) / 2), 568px"
-             width="1200" height="764" alt="NarraLeaf Studio" loading="lazy" decoding="async" />
+             width="1200" height="764" alt="TypeScript で NarraLeaf のノベルゲームを開発するコード例" loading="lazy" decoding="async" />
       </div>
     </div>
   </div>
@@ -164,14 +240,14 @@
     <div class="section-header">
       <div class="section-header-text">
         <h2>VNPen Project</h2>
-        <p>VNPen Project は、ビジュアルノベル特化モデル VNPen LLM と、デスクトップ向けシナリオエディター VNPen Desktop で構成されています<br/>ビジュアルノベルのシナリオ制作を、企画から納品まで一貫してサポートします</p>
+        <p>VNPen Project は、ビジュアルノベル特化モデル VNPen LLM と、デスクトップ向けシナリオエディター VNPen Desktop で構成されています<br/>ノベルゲームのシナリオ制作を、企画・執筆・推敲から納品まで一貫してサポートします</p>
       </div>
       <img src="/assets/images/vnpen/logo.svg" width="605" height="173" alt="VNPen Logo" class="vnpen-logo light-logo" decoding="async" />
       <img src="/assets/images/vnpen/logo-dark.svg" width="605" height="173" alt="VNPen Logo" class="vnpen-logo dark-logo" decoding="async" />
     </div>
     <div class="btn-group">
       <a href="https://github.com/vnpen" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg class="icon icon-w97" aria-hidden="true"><use href="#i-github"/></svg> GitHub 組織へ</a>
-      <a href="https://vnpen.mewbaka.cn" target="_blank" rel="noopener noreferrer" class="btn btn-outline">公式サイトへ</a>
+      <a href="https://vnpen.mewbaka.cn" target="_blank" rel="noopener noreferrer" class="btn btn-outline">VNPen 公式サイトへ</a>
     </div>
   </div>
 </section>
@@ -181,10 +257,10 @@
     <div class="section-header">
       <div class="section-header-text">
         <h2>RenMori</h2>
-        <p>商業 Ren'Py ビジュアルノベル向けの全データ保護ツール<br/>Ren'Py 8.x エンジンに対応し、ほぼ意識させることなくあなたのゲームを守ります</p>
+        <p>商業 Ren'Py ビジュアルノベル向けの暗号化・アンパック対策ツール（無料・商用利用可）<br/>Ren'Py 8.x に対応し、unrpa や unrpyc などの解析ツールを無効化。ほぼ意識させることなくゲームを守ります</p>
         <div class="btn-group">
           <a href="https://github.com/MewBaka/RenMori" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg class="icon icon-w97" aria-hidden="true"><use href="#i-github"/></svg> GitHub リポジトリへ</a>
-          <a href="https://renmori.mewbaka.cn" target="_blank" rel="noopener noreferrer" class="btn btn-outline">公式サイトへ</a>
+          <a href="https://renmori.mewbaka.cn" target="_blank" rel="noopener noreferrer" class="btn btn-outline">RenMori 公式サイトへ</a>
         </div>
       </div>
       <img src="/assets/images/renmori/logo-480.webp" width="480" height="266" alt="RenMori Logo" class="renmori-logo" decoding="async" />

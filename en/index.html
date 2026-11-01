@@ -12,11 +12,15 @@
        三份页面的 hreflang 必须互相声明（缺一份 Google 会忽略整组），
        新增语言时记得同步 hreflang、sitemap.xml 与根目录 index.html 的跳转表。
        =================================================================== -->
-  <title>MewBaka Studio</title>
-  <meta name="description" content="Official website of MewBaka Studio - creators of NarraLeaf Project, a modern visual novel game engine. We build delightful visual novel experiences." />
-  <meta name="keywords" content="MewBaka,visual novel,NarraLeaf,visual novel engine,game engine,indie game,visual novel studio" />
+  <title>MewBaka Studio – Visual Novel Engine & Development Tools</title>
+  <meta name="description" content="MewBaka Studio builds visual novel tools: the NarraLeaf engine and editor, VNPen for AI-assisted script writing, and RenMori, free Ren'Py encryption." />
+  <meta name="keywords" content="MewBaka,MewBaka Studio,visual novel,visual novel engine,visual novel maker,galgame engine,NarraLeaf,VNPen,AI visual novel writing,RenMori,Ren'Py encryption,protect Ren'Py game,indie game" />
   <meta name="author" content="MewBaka" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <!-- 百度：声明同一 URL 同时适配 PC 与移动端，并禁止百度转码/加广告 -->
+  <meta name="applicable-device" content="pc,mobile" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
   <meta name="theme-color" content="#40A8C4" />
   <meta name="color-scheme" content="light dark" />
   <link rel="canonical" href="https://www.mewbaka.cn/en/" />
@@ -24,17 +28,23 @@
   <link rel="alternate" hreflang="en" href="https://www.mewbaka.cn/en/" />
   <link rel="alternate" hreflang="ja" href="https://www.mewbaka.cn/ja/" />
   <link rel="alternate" hreflang="x-default" href="https://www.mewbaka.cn/zh/" />
+  <!-- 分享图用 JPG 而不是 WebP：微信 / QQ 等国内客户端对 WebP 预览支持不稳定 -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="MewBaka Studio" />
-  <meta property="og:description" content="Official website of MewBaka Studio - creators of the NarraLeaf Project visual novel game engine" />
+  <meta property="og:title" content="MewBaka Studio – Visual Novel Engine &amp; Development Tools" />
+  <meta property="og:description" content="Visual novel tools by MewBaka Studio: NarraLeaf engine, VNPen AI script writing, RenMori Ren'Py encryption" />
   <meta property="og:url" content="https://www.mewbaka.cn/en/" />
   <meta property="og:site_name" content="MewBaka" />
+  <meta property="og:image" content="https://www.mewbaka.cn/assets/images/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="MewBaka Studio" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:locale:alternate" content="zh_CN" />
   <meta property="og:locale:alternate" content="ja_JP" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="MewBaka Studio" />
-  <meta name="twitter:description" content="Official website of MewBaka Studio - creators of the NarraLeaf Project visual novel game engine" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MewBaka Studio – Visual Novel Engine &amp; Development Tools" />
+  <meta name="twitter:description" content="Visual novel tools by MewBaka Studio: NarraLeaf engine, VNPen AI script writing, RenMori Ren'Py encryption" />
+  <meta name="twitter:image" content="https://www.mewbaka.cn/assets/images/og.jpg" />
   <link rel="icon" href="/favicon.ico" />
 
   <!-- 主题完全由 CSS 的 prefers-color-scheme 决定，不需要内联脚本抢在首屏前设置，
@@ -47,17 +57,83 @@
   <script type="application/ld+json" id="ldJson">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "MewBaka 笨猫",
-    "alternateName": "MewBaka Studio",
-    "url": "https://www.mewbaka.cn",
-    "logo": "https://www.mewbaka.cn/assets/images/logo/dark.webp",
-    "description": "Creators of NarraLeaf Project, a visual novel game engine",
-    "sameAs": [
-      "https://github.com/mewbaka",
-      "https://github.com/narraleaf",
-      "https://space.bilibili.com/3546731419535895",
-      "https://afdian.com/a/MewBaka"
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.mewbaka.cn/#organization",
+        "name": "MewBaka 笨猫",
+        "alternateName": [
+          "MewBaka Studio",
+          "笨猫工作室"
+        ],
+        "url": "https://www.mewbaka.cn/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.mewbaka.cn/assets/images/logo/dark.webp",
+          "width": 1474,
+          "height": 333
+        },
+        "email": "team@mewbaka.cn",
+        "description": "Makers of visual novel development tools: NarraLeaf Project, VNPen and RenMori",
+        "brand": [
+          {
+            "@type": "Brand",
+            "name": "NarraLeaf Project",
+            "url": "https://narraleaf.com"
+          },
+          {
+            "@type": "Brand",
+            "name": "VNPen",
+            "url": "https://vnpen.mewbaka.cn"
+          },
+          {
+            "@type": "Brand",
+            "name": "RenMori",
+            "url": "https://renmori.mewbaka.cn"
+          }
+        ],
+        "sameAs": [
+          "https://github.com/mewbaka",
+          "https://github.com/narraleaf",
+          "https://space.bilibili.com/3546731419535895",
+          "https://afdian.com/a/MewBaka"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.mewbaka.cn/#website",
+        "url": "https://www.mewbaka.cn/",
+        "name": "MewBaka 笨猫",
+        "alternateName": "MewBaka Studio",
+        "inLanguage": [
+          "zh-CN",
+          "en",
+          "ja"
+        ],
+        "publisher": {
+          "@id": "https://www.mewbaka.cn/#organization"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.mewbaka.cn/en/#webpage",
+        "url": "https://www.mewbaka.cn/en/",
+        "name": "MewBaka Studio – Visual Novel Engine & Development Tools",
+        "description": "MewBaka Studio builds visual novel tools: the NarraLeaf engine and editor, VNPen for AI-assisted script writing, and RenMori, free Ren'Py encryption.",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@id": "https://www.mewbaka.cn/#website"
+        },
+        "about": {
+          "@id": "https://www.mewbaka.cn/#organization"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://www.mewbaka.cn/assets/images/og.jpg",
+          "width": 1200,
+          "height": 630
+        }
+      }
     ]
   }
   </script>
@@ -117,7 +193,7 @@
         <img src="/assets/images/banner-960.webp"
              srcset="/assets/images/banner-640.webp 640w, /assets/images/banner-960.webp 960w, /assets/images/banner-1280.webp 1280w"
              sizes="(max-width: 480px) calc(100vw - 24px), (max-width: 768px) calc(100vw - 48px), (max-width: 1200px) calc((100vw - 88px) / 2), 556px"
-             width="1280" height="720" alt="MewBaka Studio" fetchpriority="high" decoding="async" />
+             width="1280" height="720" alt="MewBaka Studio visual novel style background illustration" fetchpriority="high" decoding="async" />
       </div>
     </div>
   </div>
@@ -128,32 +204,32 @@
     <div class="section-header">
       <div class="section-header-text">
         <h2>NarraLeaf Project</h2>
-        <p>Visual novel engine product by MewBaka Studio<br>NarraLeaf Project is a modern Visual Novel game engine offering multiple solutions<br/>From flexible integration to all-in-one development, helping unleash your creativity</p>
+        <p>Visual novel engine product by MewBaka Studio<br>NarraLeaf Project is a modern visual novel game engine offering multiple solutions<br/>From flexible integration to all-in-one development, helping unleash your creativity</p>
       </div>
       <img src="/assets/images/narraleaf/logo-464.webp" width="460" height="127" alt="NarraLeaf Logo" class="narraleaf-logo" decoding="async" />
     </div>
     <div class="btn-group">
       <a href="https://github.com/narraleaf" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg class="icon icon-w97" aria-hidden="true"><use href="#i-github"/></svg> Visit GitHub Org</a>
-      <a href="https://narraleaf.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Visit Official Site</a>
+      <a href="https://narraleaf.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Visit NarraLeaf Website</a>
     </div>
     <div class="narraleaf-grid">
       <div class="img-large">
         <img src="/assets/images/narraleaf/img1-900.webp"
              srcset="/assets/images/narraleaf/img1-600.webp 600w, /assets/images/narraleaf/img1-900.webp 900w, /assets/images/narraleaf/img1-1200.webp 1200w"
              sizes="(max-width: 480px) calc(100vw - 24px), (max-width: 768px) calc(100vw - 48px), (max-width: 1200px) calc((100vw - 64px) / 2), 568px"
-             width="1200" height="1800" alt="NarraLeaf character artwork" loading="lazy" decoding="async" />
+             width="1200" height="1800" alt="Nara, the NarraLeaf Project mascot" loading="lazy" decoding="async" />
       </div>
       <div class="img-small">
         <img src="/assets/images/narraleaf/img2-900.webp"
              srcset="/assets/images/narraleaf/img2-600.webp 600w, /assets/images/narraleaf/img2-900.webp 900w, /assets/images/narraleaf/img2-1200.webp 1200w"
              sizes="(max-width: 480px) calc(100vw - 24px), (max-width: 768px) calc(100vw - 48px), (max-width: 1200px) calc((100vw - 64px) / 2), 568px"
-             width="1200" height="672" alt="NarraLeaf editor" loading="lazy" decoding="async" />
+             width="1200" height="672" alt="NarraLeaf Studio visual novel editor interface" loading="lazy" decoding="async" />
       </div>
       <div class="img-small">
         <img src="/assets/images/narraleaf/img3-900.webp"
              srcset="/assets/images/narraleaf/img3-600.webp 600w, /assets/images/narraleaf/img3-900.webp 900w, /assets/images/narraleaf/img3-1200.webp 1200w"
              sizes="(max-width: 480px) calc(100vw - 24px), (max-width: 768px) calc(100vw - 48px), (max-width: 1200px) calc((100vw - 64px) / 2), 568px"
-             width="1200" height="764" alt="NarraLeaf Studio" loading="lazy" decoding="async" />
+             width="1200" height="764" alt="Code example: building a NarraLeaf visual novel in TypeScript" loading="lazy" decoding="async" />
       </div>
     </div>
   </div>
@@ -164,14 +240,14 @@
     <div class="section-header">
       <div class="section-header-text">
         <h2>VNPen Project</h2>
-        <p>VNPen Project consists of VNPen LLM, a model specialized for visual novels, and VNPen Desktop, a desktop story editor<br/>Covering the entire visual novel scriptwriting workflow, from planning to delivery</p>
+        <p>VNPen Project consists of VNPen LLM, a model specialized for visual novels, and VNPen Desktop, a desktop story editor<br/>Covering the entire visual novel scriptwriting workflow, from planning, drafting and polishing to delivery</p>
       </div>
       <img src="/assets/images/vnpen/logo.svg" width="605" height="173" alt="VNPen Logo" class="vnpen-logo light-logo" decoding="async" />
       <img src="/assets/images/vnpen/logo-dark.svg" width="605" height="173" alt="VNPen Logo" class="vnpen-logo dark-logo" decoding="async" />
     </div>
     <div class="btn-group">
       <a href="https://github.com/vnpen" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg class="icon icon-w97" aria-hidden="true"><use href="#i-github"/></svg> Visit GitHub Org</a>
-      <a href="https://vnpen.mewbaka.cn" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Visit Official Site</a>
+      <a href="https://vnpen.mewbaka.cn" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Visit VNPen Website</a>
     </div>
   </div>
 </section>
@@ -181,10 +257,10 @@
     <div class="section-header">
       <div class="section-header-text">
         <h2>RenMori</h2>
-        <p>A full data protection tool for commercial Ren'Py visual novels<br/>Supports Ren'Py 8.x and protects your visual novel almost invisibly</p>
+        <p>A free encryption and anti-unpacking tool for commercial Ren'Py visual novels<br/>Supports Ren'Py 8.x, defeats unpackers and decompilers like unrpa and unrpyc, and protects your game almost invisibly</p>
         <div class="btn-group">
           <a href="https://github.com/MewBaka/RenMori" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg class="icon icon-w97" aria-hidden="true"><use href="#i-github"/></svg> Visit GitHub Repo</a>
-          <a href="https://renmori.mewbaka.cn" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Visit Official Site</a>
+          <a href="https://renmori.mewbaka.cn" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Visit RenMori Website</a>
         </div>
       </div>
       <img src="/assets/images/renmori/logo-480.webp" width="480" height="266" alt="RenMori Logo" class="renmori-logo" decoding="async" />
