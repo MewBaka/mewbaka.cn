@@ -1,0 +1,47 @@
+name: IndexNow
+
+# 每次 Vercel 生产部署成功后，通过 IndexNow 通知 Bing / Yandex 等搜索引擎重新抓取。
+# 不用 push 触发：push 时新版本还没上线，爬虫立刻来抓只会拿到旧页面；
+# Vercel 部署完成后会往 GitHub 回报一条 deployment_status，等它报 success 再提交。
+#
+# 密钥本来就是公开的：搜索引擎靠读取根目录的 /<KEY>.txt 来确认网站归属，
+# 所以直接写在这里即可，不需要放进 Secrets。换密钥时记得同时改名那个 txt 文件。
+# Google 和百度不支持 IndexNow，它们分别靠 sitemap / Search Console 和百度的 API 推送。
+
+on:
+  deployment_status:
+  workflow_dispatch:
+
+permissions: {}
+
+env:
+  HOST: www.mewbaka.cn
+  KEY: 1187fe68b8b2ccce1dc76e77e41d11bd
+
+jobs:
+  submit:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    steps:
+      # 站点只有三个页面，CSS / JS / 图片的改动也会影响全部页面，所以每次都整组提交，
+      # 不去算这次部署具体改了哪个文件。新增页面时记得同步这里和 sitemap.xml。
+      - name: Submit URLs
+        run: |
+          curl -sS --fail-with-body -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            -w '\nHTTP %{http_code}\n' \
+            -d @- <<EOF
+          {
+            "host": "$HOST",
+            "key": "$KEY",
+            "keyLocation": "https://$HOST/$KEY.txt",
+            "urlList": [
+              "https://$HOST/zh/",
+              "https://$HOST/en/",
+              "https://$HOST/ja/"
+            ]
+          }
+          EOF
